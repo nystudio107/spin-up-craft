@@ -30,9 +30,12 @@ Commit your changes to the repository.
 
 From the CP, dump the database via **Utilities -> Backup Database**, delete any existing `.sql` files from the `db-seed` directory, and put your new database dump in the `db-seed` directory. Commit your DB to the repo.
 
+People attempting the coding challenge will simply need to `git clone` the new challenge repo down, and get up and running with `make dev`
+
 ## Random notes
 
 - Currently it's hard-coded to use port `8000`; we might pick something less often used to avoid port conflicts
 - The Docker containers will be named after the project directory, so give it a unique name for each challenge
 - We could consider pushing the built image to DockerHub.com to make the initial build step slightly shorter
 - Hit Control-C to terminate the project and spin down the containers
+- We could have `make dev` spit out the login URL and credentials, or it could be in the README.md
