@@ -7,6 +7,8 @@ Use it for:
 - Providing working example code & projects to others
 - Spinning up a local Craft project using someone else's `composer.json` & database, for support
 
+**N.B.:** This is _not_ intended to be a fully functional local development environment for client sites.
+
 ## Making a new Craft CMS project
 
 This is a template repository. Click on **Use this template** on [github](https://github.com/nystudio107/spin-up-craft) and select **Create a new repository**.
