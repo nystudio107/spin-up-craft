@@ -34,15 +34,59 @@ spin-up-craft-php-1    | CP Password: project
 
 Hit `Control-C` to terminate the project and spin down the containers
 
+## Available `make` commands
+
+This project uses `make` to execute various commands in the appropriate containers. Here's a list of available commands:
+
+* `make dev` - Start the dev server
+* `make composer xxx` - Execute a composer command in the PHP container
+* `make craft xxx` - Execute a `craft` CLI command in the PHP container
+* `make ssh` - Open up a shell in the PHP container
+* `make db-admin-reset` - Reset the admin (user with the `ID=1`) to the defaults in from the `.env` file; useful after importing a foreign database
+* `make db-export` - Clean the `db-seed/` directory and export the database to it
+* `make db-import` - Import the db from `db-seed/` directory into the mysql container
+
 ## Creating your Craft CMS project
 
 Develop the site as you normally would by editing templates, adding content, adding assets, etc.
 
 Commit your changes to the repository.
 
-From the CP, dump the database via **Utilities -> Backup Database**, delete any existing `.sql` files from the `db-seed` directory, and put your new database dump in the `db-seed` directory. Commit your DB to the repo.
+To update the database dump in `db-seed/` directory, use the command:
+```
+make db-export
+```
+... and then commit the new database dump to your repository. Ensure there is no confidential data in the database dump before doing so.
 
 People wanting to use the project will simply need to `git clone` the repo down, and get up and running with `make dev`
+
+## Using Spin Up Craft for support
+
+If you're using Spin Up Craft to try to replicate an issue someone else is having:
+
+1. Clone a clean version of your repo down
+2. Copy their `composer.json` and their `composer.lock` files to overwrite the project's respective files
+3. Delete the repo's database dump from `db-seed/` and copy their database dump into it as an uncompressed `.sql` file
+
+Then start the project up with:
+```
+make dev
+```
+
+If you need to re-import their db at any time, you can use:
+```
+make db-import
+```
+
+If you don't have a login, or the client doesn't wish to share their password, you can then use:
+```
+make db-admin-reset
+```
+
+...which will reset the admin user (`ID=1`) to the defaults specified in the `.env` file
+
+Usually the `composer.json`, `composer.lock`, and database dump are all you need to replicate issues. But if additional config/template files are needed, obtain them as well.
+
 
 ## Random notes
 
@@ -51,7 +95,4 @@ People wanting to use the project will simply need to `git clone` the repo down,
 
 ## To Do
 
-- Add `make db-export` to export the current database to the `db-seed` directory
-- Add `make db-import` to import the database fresh from `db-seed`
-- Add `make db-admin-reset` to reset the admin user login to user: `admin` password: `project` for imported dbs
 - Consider pushing the built image to DockerHub.com to make the initial build step slightly shorter, for a slight loss in flexibility
