@@ -30,8 +30,6 @@ chown -R www-data:www-data /var/www/project/storage
 chown -R www-data:www-data /var/www/project/web/cpresources
 # Run any pending migrations/project config changes
 su-exec www-data php craft up
-# Run a queue listener
-su-exec www-data php craft queue/listen 10
 # Banner message
 sleep 1
 echo "### Your Craft site is ready!"
@@ -39,3 +37,5 @@ echo "Frontend URL: ${PRIMARY_SITE_URL}"
 echo "CP URL: ${PRIMARY_SITE_URL}admin"
 echo "CP User: ${CRAFT_CP_USER}"
 echo "CP Password: ${CRAFT_CP_PASSWORD}"
+# Run a queue listener
+su-exec www-data php craft queue/listen 10
