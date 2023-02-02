@@ -18,6 +18,8 @@ You will then be able to name the new repository, and a clone of this repo will 
 
 The project you'll get is the default Craft starter you might create with `composer create-project craftcms/craft`, with the Spin Up Craft scaffolding around it.
 
+If you intend to allow people to use this project in a browser via Github Codespaces (see below), you'll want to go to the repo **Settings** and check the **Template repository** checkbox.
+
 ## Using your Craft CMS project in a browser via Github Codespaces
 
 1. Go to your repo in Github
