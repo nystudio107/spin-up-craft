@@ -7,7 +7,7 @@ Use it for:
 - Providing working example code & projects to others
 - Spinning up a local Craft project using someone else's `composer.json` & database, for support
 
-**N.B.:** This is _not_ intended to be a fully functional local development environment for client sites.
+**N.B.:** This is _not_ intended to be a fully functional local development environment for client sites (there is no `buildchain`, for example).
 
 ## Making a new Craft CMS project
 

@@ -1,4 +1,5 @@
 -- MariaDB dump 10.19  Distrib 10.5.17-MariaDB, for Linux (x86_64)
+-- MariaDB dump 10.19  Distrib 10.5.17-MariaDB, for Linux (x86_64)
 --
 -- Host: mysql    Database: project
 -- ------------------------------------------------------
@@ -1116,7 +1117,7 @@ CREATE TABLE `sessions` (
   KEY `idx_yazneqmwxikhavqobhucihwgnflrdncmudzi` (`dateUpdated`),
   KEY `idx_oeujcbvyujkxarpuqhrldhvybvgkdiubxgys` (`userId`),
   CONSTRAINT `fk_tuhyhbgxqqomovzsxwiabcuitncpnjaxbcnf` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1591,7 +1592,7 @@ CREATE TABLE `widgets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-02 20:39:37
+-- Dump completed on 2023-02-02 22:45:52
 -- MariaDB dump 10.19  Distrib 10.5.17-MariaDB, for Linux (x86_64)
 --
 -- Host: mysql    Database: project
@@ -2231,7 +2232,7 @@ commit;
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `users` VALUES (1,NULL,1,0,0,0,1,'admin',NULL,NULL,NULL,'info@nystudio107.com','project','2023-02-02 20:09:22',NULL,NULL,NULL,'2023-02-02 05:28:58',NULL,1,NULL,NULL,NULL,0,'2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 20:09:22');
+INSERT INTO `users` VALUES (1,NULL,1,0,0,0,1,'admin',NULL,NULL,NULL,'info@nystudio107.com','$2y$13$crqJ.kzM.kBs.WsWGUxT9uUdR4Imi./d9prVKVya/MkWu/Bd/8.Ga','2023-02-02 22:45:38',NULL,NULL,NULL,'2023-02-02 05:28:58',NULL,1,NULL,NULL,NULL,0,'2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 22:45:38');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2282,4 +2283,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-02 20:39:37
+-- Dump completed on 2023-02-02 22:45:52

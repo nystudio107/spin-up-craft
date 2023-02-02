@@ -16,7 +16,7 @@ CONTAINER?=$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1
 db-admin-reset: up
 	docker exec -it $(CONTAINER) su-exec www-data mysql \
 		-h mysql -u "${CRAFT_DB_USER}" -p"${CRAFT_DB_PASSWORD}" "${CRAFT_DB_DATABASE}" \
-		-e 'UPDATE users SET username=${CRAFT_CP_USER}, email=${CRAFT_CP_EMAIL}, password=${CRAFT_CP_PASSWORD} WHERE id=1;'
+		-e 'UPDATE users SET username=${CRAFT_CP_USER}, email=${CRAFT_CP_EMAIL}, password=${CRAFT_HASHED_PASSWORD} WHERE id=1;'
 # Clean the `db-seed` directory and export the database to it
 db-export: up
 	rm -rf db-seed/*
