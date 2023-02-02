@@ -46,6 +46,8 @@ This project uses `make` to execute various commands in the appropriate containe
 * `make db-export` - Clean the `db-seed/` directory and export the database to it
 * `make db-import` - Import the db from `db-seed/` directory into the mysql container
 
+If the project is already running via `make dev` you can use a second terminal tab/window to execute additional commands.
+
 ## Creating your Craft CMS project
 
 Develop the site as you normally would by editing templates, adding content, adding assets, etc.
