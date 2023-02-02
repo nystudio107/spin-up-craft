@@ -1,0 +1,22 @@
+dateModified: 1675315766
+email:
+  fromEmail: info@putyourlightson.net
+  fromName: 'Craft Coding Challenge'
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    0d89c679-f6f5-42ae-8341-4bea917c6af7: 'Craft Coding Challenge' # Craft Coding Challenge
+    31006d4c-2f40-498c-9a4c-69cff4fd4279: Common # Common
+    f255ef6d-0c55-4bdc-9ced-f610bbb3bed6: 'Craft Coding Challenge' # Craft Coding Challenge
+system:
+  edition: pro
+  live: true
+  name: 'Craft Coding Challenge'
+  schemaVersion: 4.0.0.9
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  requireEmailVerification: true

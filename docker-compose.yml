@@ -1,0 +1,85 @@
+version: '3.7'
+
+services:
+  # nginx - web server
+  nginx:
+    build:
+      context: ./.docker-config/nginx
+      dockerfile: ./Dockerfile
+    depends_on:
+      - "php"
+    env_file: &env
+      - ./.env
+    init: true
+    ports:
+      - "8000:80"
+    volumes:
+      - cpresources:/var/www/project/web/cpresources:delegated
+      - ./web:/var/www/project/web:cached
+  # php - run php-fpm
+  php:
+    build: &php-build
+      context: ./.docker-config/php-prod-craft
+      dockerfile: ./Dockerfile
+    depends_on:
+      - "mysql"
+      - "redis"
+    env_file:
+      *env
+    expose:
+      - "9000"
+    init: true
+    tty: true
+    volumes: &php-volumes
+      - cpresources:/var/www/project/web/cpresources:delegated
+      - storage:/var/www/project/storage:delegated
+      - ./:/var/www/project:cached
+      # Specific directories that need to be bind-mounted
+      - ./storage/logs:/var/www/project/storage/logs:delegated
+      - ./storage/runtime/compiled_templates:/var/www/project/storage/runtime/compiled_templates:delegated
+      - ./storage/runtime/compiled_classes:/var/www/project/storage/runtime/compiled_classes:delegated
+      - ./vendor:/var/www/project/vendor:delegated
+  # mysql - database
+  mysql:
+    build:
+      context: ./.docker-config/mysql
+      dockerfile: ./Dockerfile
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+    init: true
+    expose:
+      - "3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db-seed:/docker-entrypoint-initdb.d
+  # queue - runs queue jobs via php craft queue/listen
+  queue:
+    build:
+      *php-build
+    command: /var/www/run_queue.sh
+    depends_on:
+      - "php"
+    env_file:
+      *env
+    init: true
+    tty: true
+    volumes:
+      *php-volumes
+  # redis - key/value database for caching & php sessions
+  redis:
+    build:
+      context: ./.docker-config/redis
+      dockerfile: ./Dockerfile
+    expose:
+      - "6379"
+    init: true
+volumes:
+  db-data:
+  cpresources:
+  storage:
