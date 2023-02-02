@@ -15,7 +15,8 @@ chown -R www-data:www-data /var/www/project/storage
 chown -R www-data:www-data /var/www/project/web/cpresources
 # Check for `composer.lock` & `vendor/`
 cd /var/www/project
-if [ ! -f "composer.lock" ] || [ ! -d "vendor" ]; then
+if [ ! -f "composer.lock" ] || [ ! -d "vendor" ] || [ ! -f "vendor/autoload.php" ]; then
+    chown -R www-data:www-data /var/www/project
     su-exec www-data composer install --verbose --no-progress --no-scripts --no-interaction
     # Wait until the MySQL db container responds
     echo "### Waiting for MySQL database"
@@ -26,3 +27,10 @@ if [ ! -f "composer.lock" ] || [ ! -d "vendor" ]; then
     # Run any pending migrations/project config changes
     su-exec www-data php craft up
 fi
+# Banner message
+sleep 1
+echo "### Your Craft site is ready!"
+echo "Frontend URL: ${PRIMARY_SITE_URL}"
+echo "CP URL: ${PRIMARY_SITE_URL}admin"
+echo "CP User: ${CRAFT_CP_USER}"
+echo "CP Password: ${CRAFT_CP_PASSWORD}"

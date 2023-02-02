@@ -15,12 +15,15 @@ You will then be able to name the new repository, and a clone of this repo will 
 ```
 make dev
 ```
-5. Access the site via: `http://localhost:8000`
+5. Access the site via the credentials that are output on the CLI:
 
-Credentials:
-
-**User name:** `admin`
-**Password:** `project`
+```
+craft-coding-challenge-base-php-1    | ### Your Craft site is ready!
+craft-coding-challenge-base-php-1    | Frontend URL: http://localhost:8050/
+craft-coding-challenge-base-php-1    | CP URL: http://localhost:8050/admin
+craft-coding-challenge-base-php-1    | CP User: admin
+craft-coding-challenge-base-php-1    | CP Password: project
+```
 
 ## Creating your challenge content
 
@@ -34,8 +37,7 @@ People attempting the coding challenge will simply need to `git clone` the new c
 
 ## Random notes
 
-- Currently it's hard-coded to use port `8000`; we might pick something less often used to avoid port conflicts
+- The server will use the port set via `DEV_SERVER_PORT` in the `.env` file (which is created by copying `example.env` file)
 - The Docker containers will be named after the project directory, so give it a unique name for each challenge
 - We could consider pushing the built image to DockerHub.com to make the initial build step slightly shorter
 - Hit Control-C to terminate the project and spin down the containers
-- We could have `make dev` spit out the login URL and credentials, or it could be in the README.md
