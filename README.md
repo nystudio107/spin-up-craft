@@ -3,6 +3,7 @@
 Allows you to create your own self-contained Craft CMS project complete with a seeded database, template files, assets, and devops shrink-wrapped with Docker, which you can distribute to others or use yourself.
 
 Use it for:
+- Spinning up a Craft CMS site in a browser in Github Codespaces
 - Shipping a self-contained Craft CMS site to others
 - Providing working example code & projects to others
 - Spinning up a local Craft project using someone else's `composer.json` & database, for support
@@ -16,6 +17,17 @@ This is a template repository. Click on **Use this template** on [github](https:
 You will then be able to name the new repository, and a clone of this repo will be created there.
 
 The project you'll get is the default Craft starter you might create with `composer create-project craftcms/craft`, with the Spin Up Craft scaffolding around it.
+
+## Using your Craft CMS project in a browser via Github Codespaces
+
+1. Go to your repo in Github
+2. Click on **Use this template** and select **Open in a codespace**
+3. In the resulting Terminal window, type `make dev` to start the project up
+4. Click on the **Open in a Browser** button that appears at the bottom-right
+
+This lets anyone use the project without having to do _any_ local setup.
+
+You can use the Codespaces editor to edit Twig files, load the site frontend, or log into the Craft CP, all from within a browser!
 
 ## Using your Craft CMS project in local dev
 
