@@ -1,17 +1,24 @@
-dateModified: 1675315766
+dateModified: 1675370314
 email:
   fromEmail: info@putyourlightson.net
   fromName: 'Craft Coding Challenge'
   transportType: craft\mail\transportadapters\Sendmail
+graphql:
+  publicToken:
+    enabled: false
+    expiryDate: null
 meta:
   __names__:
-    0d89c679-f6f5-42ae-8341-4bea917c6af7: 'Craft Coding Challenge' # Craft Coding Challenge
+    0d89c679-f6f5-42ae-8341-4bea917c6af7: $CRAFT_SITE_NAME # $CRAFT_SITE_NAME
+    0779f354-f5d2-4f82-9a36-28a252f70ce4: 'Public Schema'
     31006d4c-2f40-498c-9a4c-69cff4fd4279: Common # Common
-    f255ef6d-0c55-4bdc-9ced-f610bbb3bed6: 'Craft Coding Challenge' # Craft Coding Challenge
+    c7c2807b-84cc-4e1f-9279-af044bc0b472: 'Public Schema' # Public Schema
+    f255ef6d-0c55-4bdc-9ced-f610bbb3bed6: $CRAFT_SITE_NAME # $CRAFT_SITE_NAME
 system:
   edition: pro
   live: true
-  name: 'Craft Coding Challenge'
+  name: $CRAFT_SITE_NAME
+  retryDuration: null
   schemaVersion: 4.0.0.9
   timeZone: America/Los_Angeles
 users:
