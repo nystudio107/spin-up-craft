@@ -11,7 +11,9 @@ Use it for:
 
 This is a template repository. Click on **Use this template** on [github](https://github.com/nystudio107/spin-up-craft) and select **Create a new repository**.
 
-You will then be able to name the new repository, and a clone of this repo will be created there
+You will then be able to name the new repository, and a clone of this repo will be created there.
+
+The project you'll get is the default Craft starter you might create with `composer create-project craftcms/craft`, with the Spin Up Craft scaffolding around it.
 
 ## Using your Craft CMS project in local dev
 
