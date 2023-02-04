@@ -71,14 +71,6 @@ services:
     tty: true
     volumes:
       *php-volumes
-  # redis - key/value database for caching & php sessions
-  redis:
-    build:
-      context: ./.docker-config/redis
-      dockerfile: ./Dockerfile
-    expose:
-      - "6379"
-    init: true
 volumes:
   db-data:
   cpresources:
