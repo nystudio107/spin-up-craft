@@ -19,11 +19,10 @@ services:
   # php - run php-fpm
   php:
     build: &php-build
-      context: ./.docker-config/php-prod-craft
+      context: ./.docker-config/php
       dockerfile: ./Dockerfile
     depends_on:
       - "mysql"
-      - "redis"
     env_file:
       *env
     expose:
