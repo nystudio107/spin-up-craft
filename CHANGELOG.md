@@ -1,6 +1,9 @@
 # nystudio107/spin-up-craft Change Log
 
 ## 1.0.2 - UNRELEASED
+### Added
+* Build docker images via Github Actions CI
+
 ### Changed
 * Use a pre-built `spin-up-craft-base` for faster cold starts
 * Removed vestigial `redis` container for faster cold starts
