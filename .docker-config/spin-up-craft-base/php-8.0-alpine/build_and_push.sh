@@ -1,5 +1,5 @@
 #!/bin/sh
-# Build this image, and pushes it to DockerHub.com
+# Build this image, and push it to DockerHub.com
 
 docker buildx build \
 --push \
