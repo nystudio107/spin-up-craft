@@ -1,6 +1,6 @@
 # nystudio107/spin-up-craft Change Log
 
-## 1.0.2 - UNRELEASED
+## 1.0.2 - 2023.02.04
 ### Added
 * Build docker images via Github Actions CI
 
