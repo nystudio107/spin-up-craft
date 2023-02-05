@@ -115,6 +115,6 @@ Usually the `composer.json`, `composer.lock`, and database dump are all you need
 
 ## To Do
 
-- Consider pushing the built image to DockerHub.com to make the initial build step slightly shorter, for a slight loss in flexibility
+- Await orders from Ben & Ryan
 
 Brought to you by [nystudio107](https://nystudio107.com/)
