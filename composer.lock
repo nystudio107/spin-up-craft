@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b38e01351492fc6acf0cdcc443804aff",
+    "content-hash": "b98f78de24009dc36a364c0b5a5ec166",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -678,16 +678,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "4.3.6.1",
+            "version": "4.3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "c3afbef706beafbe71b64735e1124ff345dc6e48"
+                "reference": "750fe591748cf79e06ab08f6c82cb80611d53c30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/c3afbef706beafbe71b64735e1124ff345dc6e48",
-                "reference": "c3afbef706beafbe71b64735e1124ff345dc6e48",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/750fe591748cf79e06ab08f6c82cb80611d53c30",
+                "reference": "750fe591748cf79e06ab08f6c82cb80611d53c30",
                 "shasum": ""
             },
             "require": {
@@ -792,7 +792,7 @@
                 "rss": "https://github.com/craftcms/cms/releases.atom",
                 "source": "https://github.com/craftcms/cms"
             },
-            "time": "2023-01-10T00:55:43+00:00"
+            "time": "2023-02-06T04:32:24+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -1855,7 +1855,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v9.50.1",
+            "version": "v9.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1910,16 +1910,16 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v9.50.1",
+            "version": "v9.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
-                "reference": "5b40f51ccb07e0e7b1ec5559d8db9e0e2dc51883"
+                "reference": "bea24daa0fa84b7e7b0d5b84f62c71b7e2dc3364"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/conditionable/zipball/5b40f51ccb07e0e7b1ec5559d8db9e0e2dc51883",
-                "reference": "5b40f51ccb07e0e7b1ec5559d8db9e0e2dc51883",
+                "url": "https://api.github.com/repos/illuminate/conditionable/zipball/bea24daa0fa84b7e7b0d5b84f62c71b7e2dc3364",
+                "reference": "bea24daa0fa84b7e7b0d5b84f62c71b7e2dc3364",
                 "shasum": ""
             },
             "require": {
@@ -1952,11 +1952,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-29T19:44:19+00:00"
+            "time": "2023-02-01T21:42:32+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v9.50.1",
+            "version": "v9.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -2004,7 +2004,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v9.50.1",
+            "version": "v9.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -2325,16 +2325,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50"
+                "reference": "e1c0ae1528ce313a450e5e1ad782765c4a8dd3cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50",
-                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e1c0ae1528ce313a450e5e1ad782765c4a8dd3cb",
+                "reference": "e1c0ae1528ce313a450e5e1ad782765c4a8dd3cb",
                 "shasum": ""
             },
             "require": {
@@ -2349,7 +2349,7 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "elasticsearch/elasticsearch": "^7 || ^8",
                 "ext-json": "*",
-                "graylog2/gelf-php": "^1.4.2",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
                 "guzzlehttp/guzzle": "^7.4",
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
@@ -2411,7 +2411,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.8.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.9.0"
             },
             "funding": [
                 {
@@ -2423,7 +2423,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-24T11:55:47+00:00"
+            "time": "2023-02-05T13:07:32+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5227,32 +5227,31 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.4.19",
+            "version": "v6.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "2944bbc23f5f8da2b962fbcbf7c4a6109b2f4b7b"
+                "reference": "eb980457fa6899840fe1687e8627a03a7d8a3d52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/2944bbc23f5f8da2b962fbcbf7c4a6109b2f4b7b",
-                "reference": "2944bbc23f5f8da2b962fbcbf7c4a6109b2f4b7b",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb980457fa6899840fe1687e8627a03a7d8a3d52",
+                "reference": "eb980457fa6899840fe1687e8627a03a7d8a3d52",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5",
-                "symfony/polyfill-mbstring": "~1.0",
-                "symfony/polyfill-php80": "^1.16"
+                "php": ">=8.0.2",
+                "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<5.4.3",
-                "symfony/console": "<4.4"
+                "symfony/console": "<5.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "symfony/console": "^4.4|^5.0|^6.0",
-                "symfony/process": "^4.4|^5.0|^6.0",
-                "symfony/uid": "^5.1|^6.0",
+                "symfony/console": "^5.4|^6.0",
+                "symfony/process": "^5.4|^6.0",
+                "symfony/uid": "^5.4|^6.0",
                 "twig/twig": "^2.13|^3.0.4"
             },
             "suggest": {
@@ -5296,7 +5295,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.4.19"
+                "source": "https://github.com/symfony/var-dumper/tree/v6.0.19"
             },
             "funding": [
                 {
@@ -5312,7 +5311,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-16T10:52:33+00:00"
+            "time": "2023-01-20T17:44:14+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -6836,323 +6835,29 @@
     ],
     "packages-dev": [
         {
-            "name": "craftcms/generator",
-            "version": "1.2.0",
+            "name": "nystudio107/craft-autocomplete",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/craftcms/generator.git",
-                "reference": "80b2ee7595f8857a8282443a352243b61b9faae8"
+                "url": "https://github.com/nystudio107/craft-autocomplete.git",
+                "reference": "157f6a7a10d36888f70772f9fdfc97e13a7a439c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/generator/zipball/80b2ee7595f8857a8282443a352243b61b9faae8",
-                "reference": "80b2ee7595f8857a8282443a352243b61b9faae8",
+                "url": "https://api.github.com/repos/nystudio107/craft-autocomplete/zipball/157f6a7a10d36888f70772f9fdfc97e13a7a439c",
+                "reference": "157f6a7a10d36888f70772f9fdfc97e13a7a439c",
                 "shasum": ""
             },
             "require": {
-                "craftcms/cms": "^4.3.5",
-                "nette/php-generator": "^4.0",
-                "nikic/php-parser": "^4.15",
-                "php": "^8.0.2"
-            },
-            "require-dev": {
-                "craftcms/ecs": "dev-main",
-                "craftcms/phpstan": "dev-main",
-                "pestphp/pest": "^1.22"
+                "craftcms/cms": "^3.0.0 || ^4.0.0-alpha"
             },
             "type": "yii2-extension",
             "extra": {
-                "bootstrap": "craft\\generator\\Extension"
+                "bootstrap": "nystudio107\\autocomplete\\Autocomplete"
             },
             "autoload": {
                 "psr-4": {
-                    "craft\\generator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "mit"
-            ],
-            "authors": [
-                {
-                    "name": "Pixel & Tonic",
-                    "homepage": "https://pixelandtonic.com/"
-                }
-            ],
-            "description": "Craft CMS component generator",
-            "homepage": "https://craftcms.com",
-            "keywords": [
-                "cms",
-                "craftcms",
-                "yii2"
-            ],
-            "support": {
-                "email": "support@craftcms.com",
-                "issues": "https://github.com/craftcms/generator/issues?state=open",
-                "rss": "https://github.com/craftcms/generator/releases.atom",
-                "source": "https://github.com/craftcms/generator"
-            },
-            "time": "2023-01-11T15:59:08+00:00"
-        },
-        {
-            "name": "nette/php-generator",
-            "version": "v4.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/php-generator.git",
-                "reference": "a8d6abeae5d8c7202cd69600e086a7a72877fc86"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/a8d6abeae5d8c7202cd69600e086a7a72877fc86",
-                "reference": "a8d6abeae5d8c7202cd69600e086a7a72877fc86",
-                "shasum": ""
-            },
-            "require": {
-                "nette/utils": "^3.2.7 || ^4.0",
-                "php": ">=8.0 <8.3"
-            },
-            "require-dev": {
-                "nette/tester": "^2.4",
-                "nikic/php-parser": "^4.15",
-                "phpstan/phpstan": "^1.0",
-                "tracy/tracy": "^2.8"
-            },
-            "suggest": {
-                "nikic/php-parser": "to use ClassType::from(withBodies: true) & ClassType::fromCode()"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0-only",
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 8.2 features.",
-            "homepage": "https://nette.org",
-            "keywords": [
-                "code",
-                "nette",
-                "php",
-                "scaffolding"
-            ],
-            "support": {
-                "issues": "https://github.com/nette/php-generator/issues",
-                "source": "https://github.com/nette/php-generator/tree/v4.0.5"
-            },
-            "time": "2022-11-02T20:37:46+00:00"
-        },
-        {
-            "name": "nette/utils",
-            "version": "v3.2.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/utils.git",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2 <8.3"
-            },
-            "conflict": {
-                "nette/di": "<3.0.6"
-            },
-            "require-dev": {
-                "jetbrains/phpstorm-attributes": "dev-master",
-                "nette/tester": "~2.0",
-                "phpstan/phpstan": "^1.0",
-                "tracy/tracy": "^2.3"
-            },
-            "suggest": {
-                "ext-gd": "to use Image",
-                "ext-iconv": "to use Strings::webalize(), toAscii(), chr() and reverse()",
-                "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
-                "ext-json": "to use Nette\\Utils\\Json",
-                "ext-mbstring": "to use Strings::lower() etc...",
-                "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()",
-                "ext-xml": "to use Strings::length() etc. when mbstring is not available"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0-only",
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
-            "homepage": "https://nette.org",
-            "keywords": [
-                "array",
-                "core",
-                "datetime",
-                "images",
-                "json",
-                "nette",
-                "paginator",
-                "password",
-                "slugify",
-                "string",
-                "unicode",
-                "utf-8",
-                "utility",
-                "validation"
-            ],
-            "support": {
-                "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v3.2.9"
-            },
-            "time": "2023-01-18T03:26:20+00:00"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.15.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/570e980a201d8ed0236b0a62ddf2c9cbb2034039",
-                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.3"
-            },
-            "time": "2023-01-16T22:05:37+00:00"
-        },
-        {
-            "name": "psy/psysh",
-            "version": "v0.11.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "52cb7c47d403c31c0adc9bf7710fc355f93c20f7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/52cb7c47d403c31c0adc9bf7710fc355f93c20f7",
-                "reference": "52cb7c47d403c31c0adc9bf7710fc355f93c20f7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-tokenizer": "*",
-                "nikic/php-parser": "^4.0 || ^3.1",
-                "php": "^8.0 || ^7.0.8",
-                "symfony/console": "^6.0 || ^5.0 || ^4.0 || ^3.4",
-                "symfony/var-dumper": "^6.0 || ^5.0 || ^4.0 || ^3.4"
-            },
-            "conflict": {
-                "symfony/console": "4.4.37 || 5.3.14 || 5.3.15 || 5.4.3 || 5.4.4 || 6.0.3 || 6.0.4"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.2"
-            },
-            "suggest": {
-                "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
-                "ext-pdo-sqlite": "The doc command requires SQLite to work.",
-                "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
-                "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history."
-            },
-            "bin": [
-                "bin/psysh"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "0.11.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
-                "psr-4": {
-                    "Psy\\": "src/"
+                    "nystudio107\\autocomplete\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -7161,89 +6866,37 @@
             ],
             "authors": [
                 {
-                    "name": "Justin Hileman",
-                    "email": "justin@justinhileman.info",
-                    "homepage": "http://justinhileman.com"
-                }
-            ],
-            "description": "An interactive shell for modern PHP.",
-            "homepage": "http://psysh.org",
-            "keywords": [
-                "REPL",
-                "console",
-                "interactive",
-                "shell"
-            ],
-            "support": {
-                "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.12"
-            },
-            "time": "2023-01-29T21:24:40+00:00"
-        },
-        {
-            "name": "yiisoft/yii2-shell",
-            "version": "2.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-shell.git",
-                "reference": "358d4651ce1f54db0f1add026c202ac2e47db06b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-shell/zipball/358d4651ce1f54db0f1add026c202ac2e47db06b",
-                "reference": "358d4651ce1f54db0f1add026c202ac2e47db06b",
-                "shasum": ""
-            },
-            "require": {
-                "psy/psysh": "~0.9.3|~0.10.3|^0.11.0",
-                "symfony/var-dumper": "~2.7|~3.0|~4.0|~5.0",
-                "yiisoft/yii2": "~2.0.0"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "bootstrap": "yii\\shell\\Bootstrap",
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\shell\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Gomez Pan",
-                    "email": "pana_1990@hotmail.com"
+                    "name": "nystudio107",
+                    "homepage": "https://nystudio107.com"
                 },
                 {
-                    "name": "Sascha Vincent Kurowski",
-                    "email": "svkurowski@gmail.com"
+                    "name": "PutYourLightsOn",
+                    "homepage": "https://putyourlightson.com"
                 }
             ],
-            "description": "The interactive shell extension for Yii framework",
+            "description": "Provides Twig template IDE autocomplete of Craft CMS & plugin variables",
             "keywords": [
-                "shell",
-                "yii2"
+                "Craft",
+                "auto",
+                "autocomplete",
+                "cms",
+                "complete",
+                "craftcms",
+                "symfony",
+                "twig"
             ],
             "support": {
-                "forum": "http://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
-                "issues": "https://github.com/yiisoft/yii2-shell/issues",
-                "source": "https://github.com/yiisoft/yii2-shell",
-                "wiki": "http://www.yiiframework.com/wiki/"
+                "docs": "https://github.com/nystudio107/craft-autocomplete/blob/v1/README.md",
+                "issues": "https://github.com/nystudio107/craft-autocomplete/issues",
+                "source": "https://github.com/nystudio107/craft-autocomplete"
             },
             "funding": [
                 {
-                    "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
+                    "url": "https://github.com/khalwat",
+                    "type": "github"
                 }
             ],
-            "time": "2022-09-04T10:37:52+00:00"
+            "time": "2022-12-19T23:52:34+00:00"
         }
     ],
     "aliases": [],

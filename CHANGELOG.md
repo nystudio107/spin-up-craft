@@ -1,5 +1,15 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.3 - 2023.02.05
+### Added
+* Added `nystudio107/craft-autocomplete` to allow for Craft API autocomplete in PhpStorm
+
+### Changed
+* Updated to `"craftcms/cms": "^4.3.7.1"`
+* Removed `craftcms/generator` to lighten the dependency graph
+* Removed `yiisoft/yii2-shell` to lighten the dependency graph
+* Use `PHPIZE_DEPS` in `spin-up-craft-base` Docker image
+
 ## 1.0.2 - 2023.02.04
 ### Added
 * Build docker images via Github Actions CI
