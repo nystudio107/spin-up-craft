@@ -6,6 +6,7 @@
 
 ### Changed
 * Use `#!/bin/sh` for the scripts shebang
+* Updated to `"craftcms/cms": "^4.3.8"`
 
 ## 1.0.3 - 2023.02.05
 ### Added
