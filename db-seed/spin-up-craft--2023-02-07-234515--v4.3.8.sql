@@ -1,4 +1,4 @@
--- MariaDB dump 10.19  Distrib 10.5.17-MariaDB, for Linux (aarch64)
+-- MariaDB dump 10.19  Distrib 10.6.12-MariaDB, for Linux (x86_64)
 --
 -- Host: mysql    Database: project
 -- ------------------------------------------------------
@@ -1116,7 +1116,7 @@ CREATE TABLE `sessions` (
   KEY `idx_yazneqmwxikhavqobhucihwgnflrdncmudzi` (`dateUpdated`),
   KEY `idx_oeujcbvyujkxarpuqhrldhvybvgkdiubxgys` (`userId`),
   CONSTRAINT `fk_tuhyhbgxqqomovzsxwiabcuitncpnjaxbcnf` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1591,8 +1591,8 @@ CREATE TABLE `widgets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-06  4:44:17
--- MariaDB dump 10.19  Distrib 10.5.17-MariaDB, for Linux (aarch64)
+-- Dump completed on 2023-02-07 23:45:16
+-- MariaDB dump 10.19  Distrib 10.6.12-MariaDB, for Linux (x86_64)
 --
 -- Host: mysql    Database: project
 -- ------------------------------------------------------
@@ -1905,7 +1905,7 @@ commit;
 LOCK TABLES `info` WRITE;
 /*!40000 ALTER TABLE `info` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `info` VALUES (1,'4.3.7.1','4.0.0.9',0,'iiduyilzooha','3@tylawohvfc','2023-02-02 05:28:23','2023-02-06 04:43:26','876de66d-7fde-40c5-b8b8-c4713c00d927');
+INSERT INTO `info` VALUES (1,'4.3.8','4.0.0.9',0,'iiduyilzooha','3@tylawohvfc','2023-02-02 05:28:23','2023-02-07 23:45:04','876de66d-7fde-40c5-b8b8-c4713c00d927');
 /*!40000 ALTER TABLE `info` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2231,7 +2231,7 @@ commit;
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `users` VALUES (1,NULL,1,0,0,0,1,'admin',NULL,NULL,NULL,'info@nystudio107.com','$2y$13$crqJ.kzM.kBs.WsWGUxT9uUdR4Imi./d9prVKVya/MkWu/Bd/8.Ga','2023-02-06 04:19:46',NULL,NULL,NULL,'2023-02-02 05:28:58',NULL,1,NULL,NULL,NULL,0,'2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-06 04:19:46');
+INSERT INTO `users` VALUES (1,NULL,1,0,0,0,1,'admin',NULL,NULL,NULL,'info@nystudio107.com','$2y$13$crqJ.kzM.kBs.WsWGUxT9uUdR4Imi./d9prVKVya/MkWu/Bd/8.Ga','2023-02-07 23:43:06',NULL,NULL,NULL,'2023-02-02 05:28:58',NULL,1,NULL,NULL,NULL,0,'2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-07 23:43:06');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2282,4 +2282,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-06  4:44:17
+-- Dump completed on 2023-02-07 23:45:16
