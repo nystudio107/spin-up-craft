@@ -1,5 +1,12 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.4 - UNRELEASED
+### Added
+*  Add PHP 8.1 as the default image
+
+### Changed
+* Use `#!/bin/sh` for the scripts shebang
+
 ## 1.0.3 - 2023.02.05
 ### Added
 * Added `nystudio107/craft-autocomplete` to allow for Craft API autocomplete in PhpStorm
