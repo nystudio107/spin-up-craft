@@ -1,6 +1,6 @@
 # nystudio107/spin-up-craft Change Log
 
-## 1.0.4 - UNRELEASED
+## 1.0.4 - 2023.02.08
 ### Added
 *  Add PHP 8.1 as the default image
 
