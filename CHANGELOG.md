@@ -1,5 +1,12 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.5 - 2023.02.14
+### Added
+* Detect when we're running in Codespaces, and swap in the dynamic URL for the `PRIMARY_SITE_URL` env var automatically
+
+### Changed
+* Refactor the banner to a separate `banner_message.sh`
+
 ## 1.0.4 - 2023.02.08
 ### Added
 *  Add PHP 8.1 as the default image
