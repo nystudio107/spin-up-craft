@@ -6,7 +6,7 @@
 # the `vendor/` directory is not present`
 #
 # @author    nystudio107
-# @copyright Copyright (c) 2022 nystudio107
+# @copyright Copyright (c) 2023 nystudio107
 # @link      https://nystudio107.com/
 # @license   MIT
 
@@ -28,9 +28,4 @@ if [ ! -f "composer.lock" ] || [ ! -d "vendor" ] || [ ! -f "vendor/autoload.php"
     su-exec www-data php craft up
 fi
 # Banner message
-sleep 1
-echo "### Your Craft site is ready!"
-echo "Frontend URL: ${PRIMARY_SITE_URL}"
-echo "CP URL: ${PRIMARY_SITE_URL}admin"
-echo "CP User: ${CRAFT_CP_USER}"
-echo "CP Password: ${CRAFT_CP_PASSWORD}"
+source '/var/www/banner_message.sh'
