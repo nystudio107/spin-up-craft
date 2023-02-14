@@ -11,6 +11,16 @@
 use craft\config\GeneralConfig;
 use craft\helpers\App;
 
+// Rewrite the PRIMARY_SITE_URL env var if we're running in Codespaces
+if (App::env('CODESPACES')) {
+    // putenv() only affects the OS's environment, so set it directly
+    $_ENV['PRIMARY_SITE_URL'] = $_SERVER['PRIMARY_SITE_URL'] = sprintf(
+        "https://%s-%s.preview.app.github.dev/",
+        App::env('CODESPACE_NAME'),
+        App::env('DEV_SERVER_PORT')
+    );
+}
+
 return GeneralConfig::create()
     ->runQueueAutomatically(false)
     // Set the default week start day for date pickers (0 = Sunday, 1 = Monday, etc.)

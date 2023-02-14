@@ -12,6 +12,8 @@ RUN chmod a+x run_queue.sh \
     chown -R www-data:www-data /var/www/project
 COPY ./composer_install.sh .
 RUN chmod a+x composer_install.sh
+COPY ./banner_message.sh .
+RUN chmod a+x banner_message.sh
 
 WORKDIR /var/www/project
 
