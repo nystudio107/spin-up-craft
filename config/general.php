@@ -15,9 +15,10 @@ use craft\helpers\App;
 if (App::env('CODESPACES')) {
     // putenv() only affects the OS's environment, so set it directly
     $_ENV['PRIMARY_SITE_URL'] = $_SERVER['PRIMARY_SITE_URL'] = sprintf(
-        "https://%s-%s.preview.app.github.dev/",
+        "https://%s-%s.%s/",
         App::env('CODESPACE_NAME'),
-        App::env('DEV_SERVER_PORT')
+        App::env('DEV_SERVER_PORT'),
+        App::env('GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN')
     );
 }
 

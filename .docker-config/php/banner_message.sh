@@ -11,7 +11,7 @@
 
 # Rewrite the PRIMARY_SITE_URL env var if we're running in Codespaces
 if [[ ! ${CODESPACES:-"unset"} == "unset" ]]; then
-    export PRIMARY_SITE_URL="https://${CODESPACE_NAME}-${DEV_SERVER_PORT}.preview.app.github.dev/"
+    export PRIMARY_SITE_URL="https://${CODESPACE_NAME}-${DEV_SERVER_PORT}.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/"
 fi
 # Banner message
 sleep 1
