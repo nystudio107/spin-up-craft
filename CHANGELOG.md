@@ -1,5 +1,10 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.6 - 2023.02.15
+### Changed
+* Use the `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` env var
+* Use `env_file` & `env` aliases in the docker-compose.yaml
+
 ## 1.0.5 - 2023.02.14
 ### Added
 * Detect when we're running in Codespaces, and swap in the dynamic URL for the `PRIMARY_SITE_URL` env var automatically
