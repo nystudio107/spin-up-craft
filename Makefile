@@ -9,6 +9,13 @@ else
 	SEPARATOR:=_
 endif
 CONTAINER?=$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1
+# Dummy empty values for Codespaces to avoid warnings from Docker
+CODESPACES?=
+CODESPACE_NAME?=
+GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN?=
+export CODESPACES
+export CODESPACE_NAME
+export GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN
 
 .PHONY: db-admin-reset db-export db-import clean composer craft dev nuke ssh up
 
