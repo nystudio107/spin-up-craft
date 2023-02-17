@@ -34,6 +34,7 @@ services:
     expose:
       - "9000"
     init: true
+    stop_grace_period: "1s"
     tty: true
     volumes: &php-volumes
       - cpresources:/var/www/project/web/cpresources:delegated
@@ -75,6 +76,7 @@ services:
     environment:
       *env
     init: true
+    stop_grace_period: "1s"
     tty: true
     volumes:
       *php-volumes
