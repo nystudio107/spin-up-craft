@@ -1,5 +1,11 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.7 - 2023.02.17
+### Changed
+* Added `stop_grace_period: "1s"` to the services that have long-running processes in the `docker-compose.yaml`
+* Add dummy empty values for Codespaces in the Makefile, to avoid warnings from Docker
+* Updated to `"craftcms/cms": "^4.3.10"`
+
 ## 1.0.6 - 2023.02.15
 ### Changed
 * Use the `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` env var
