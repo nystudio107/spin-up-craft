@@ -1,5 +1,9 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.8 - UNRELEASED
+### Added
+* Add `spin-up-craft-base-dev` image that includes XDebug
+
 ## 1.0.7 - 2023.02.17
 ### Changed
 * Added `stop_grace_period: "1s"` to the services that have long-running processes in the `docker-compose.yaml`
