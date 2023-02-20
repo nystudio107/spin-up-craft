@@ -32,17 +32,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build .docker-config/nystudio107/${{ matrix.images }}:${{ matrix.php }}-alpine
         uses: docker/build-push-action@v4
-        env:
-          IMAGE_TAGS: ["nystudio107/${{ matrix.images }}:${{ matrix.php }}-alpine"]
-        run: |
-          if matrix.php == '8.1'; then
-            IMAGE_TAGS+="nystudio107/${{ matrix.images }}:latest"
-          fi
         with:
           context: .docker-config/${{ matrix.images }}/php-${{ matrix.php }}-alpine
           file: .docker-config/${{ matrix.images }}/php-${{ matrix.php }}-alpine/Dockerfile
           push: false
           platforms: linux/amd64,linux/arm64
-          tags: ${{ join(fromJson(env.IMAGE_TAGS), ',') }}
+          tags: nystudio107/${{ matrix.images }}:${{ matrix.php }}-alpine
           build-args: |
             PHP_VERSION=${{ matrix.php }}
