@@ -8,7 +8,7 @@ ifneq (,$(findstring v2.,$(VERSION)))
 else
 	SEPARATOR:=_
 endif
-CONTAINER?=$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1
+CONTAINER?=$(subst .,,$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1)
 # Dummy empty values for Codespaces to avoid warnings from Docker
 CODESPACES?=
 CODESPACE_NAME?=
