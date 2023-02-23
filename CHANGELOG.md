@@ -1,6 +1,6 @@
 # nystudio107/spin-up-craft Change Log
 
-## 1.0.8 - UNRELEASED
+## 1.0.8 - 2023.02.23
 ### Added
 * Add `spin-up-craft-base-dev` image that includes XDebug
 
