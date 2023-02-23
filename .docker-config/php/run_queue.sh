@@ -29,7 +29,7 @@ done
 chown -R www-data:www-data /var/www/project/storage
 chown -R www-data:www-data /var/www/project/web/cpresources
 # Run any pending migrations/project config changes
-su-exec www-data php craft up
+su-exec www-data php craft up --interactive=0
 # Banner message
 source '/var/www/banner_message.sh'
 # Run a queue listener
