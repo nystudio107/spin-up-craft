@@ -25,7 +25,7 @@ if [ ! -f "composer.lock" ] || [ ! -d "vendor" ] || [ ! -f "vendor/autoload.php"
         sleep 1
     done
     # Run any pending migrations/project config changes
-    su-exec www-data php craft up
+    su-exec www-data php craft up --interactive=0
 fi
 # Banner message
 source '/var/www/banner_message.sh'
