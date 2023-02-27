@@ -8,6 +8,7 @@ ifneq (,$(findstring v2.,$(VERSION)))
 else
 	SEPARATOR:=_
 endif
+INITIAL_SERVER_PORT?=8050
 CONTAINER?=$(subst .,,$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1)
 # Dummy empty values for Codespaces to avoid warnings from Docker
 CODESPACES?=
@@ -56,6 +57,12 @@ ssh:
 	docker exec -it $(CONTAINER) su-exec www-data /bin/sh
 up:
 	if [ ! "$$(docker ps -q -f name=$(CONTAINER))" ]; then \
+  		port=$(INITIAL_SERVER_PORT); \
+		while [ -z "$$DEV_SERVER_PORT" ] ; do \
+		  nc -z localhost $$port || export DEV_SERVER_PORT=$$port; \
+		  ((port++)); \
+		done; \
+		echo "### Using port: $$DEV_SERVER_PORT"; \
 		cp -n example.env .env; \
 		docker-compose up; \
     fi
