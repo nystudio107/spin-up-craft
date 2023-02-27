@@ -127,7 +127,9 @@ Usually the `composer.json`, `composer.lock`, and database dump are all you need
 
 ## Random notes
 
-- The server will use the port set via `DEV_SERVER_PORT` in the `.env` file (which is created by copying `example.env` file)
+- The `.env` file is created by copying `example.env` file when you start the project up
+- The server will use the `INITIAL_SERVER_PORT` in the `.env` file for the initial port to start looking for unused ports from. It will increment it until it finds and unused port, and then use it
+- If instead you want to used a fixed port, you can explicitly set the `DEV_SERVER_PORT` in the `.env` file
 - The Docker containers will be named after the project directory, so give it a unique name for each project
 
 ## To Do
