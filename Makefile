@@ -10,6 +10,8 @@ else
 endif
 INITIAL_SERVER_PORT?=8050
 CONTAINER?=$(subst .,,$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1)
+DEV_SERVER_PORT=$(INITIAL_SERVER_PORT)
+export DEV_SERVER_PORT
 # Dummy empty values for Codespaces to avoid warnings from Docker
 CODESPACES?=
 CODESPACE_NAME?=
@@ -51,7 +53,6 @@ dev: up
 # Remove the Docker volumes & start clean
 nuke: clean
 	docker-compose down -v
-	export DEV_SERVER_PORT=$$INITIAL_SERVER_PORT; \
 	if [ -z "$$CODESPACES" ]; then \
 		port=$(INITIAL_SERVER_PORT); \
 		while [ -z "$$DEV_SERVER_PORT" ] ; do \
@@ -67,7 +68,6 @@ ssh:
 	docker exec -it $(CONTAINER) su-exec www-data /bin/sh
 up:
 	if [ ! "$$(docker ps -q -f name=$(CONTAINER))" ]; then \
-		export DEV_SERVER_PORT=$$INITIAL_SERVER_PORT; \
 		if [ -z "$$CODESPACES" ]; then \
 	  		port=$(INITIAL_SERVER_PORT); \
 			while [ -z "$$DEV_SERVER_PORT" ] ; do \
