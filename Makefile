@@ -34,8 +34,6 @@ db-export: up
 db-import: up
 	docker exec -it $(CONTAINER) su-exec www-data /bin/sh \
 		-c 'cat /var/www/project/db-seed/*.sql | mysql -h mysql -u "${CRAFT_DB_USER}" -p"${CRAFT_DB_PASSWORD}" "${CRAFT_DB_DATABASE}"'
-# Start the dev server
-dev: up
 # Remove `vendor/` & `composer.lock`
 clean:
 	rm -f composer.lock
@@ -48,9 +46,18 @@ composer: up
 craft: up
 	docker exec -it $(CONTAINER) su-exec www-data php craft \
 		$(filter-out $@,$(MAKECMDGOALS)) $(MAKEFLAGS)
+# Start the dev server
+dev: up
 # Remove the Docker volumes & start clean
 nuke: clean
 	docker-compose down -v
+	port=$(INITIAL_SERVER_PORT); \
+	while [ -z "$$DEV_SERVER_PORT" ] ; do \
+	  nc -z localhost $$port || export DEV_SERVER_PORT=$$port; \
+	  ((port++)); \
+	done; \
+	echo "### Using port: $$DEV_SERVER_PORT"; \
+	cp -n example.env .env; \
 	docker-compose up --build --force-recreate
 # Open up a shell in the PHP container
 ssh:
