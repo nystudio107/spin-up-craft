@@ -51,12 +51,15 @@ dev: up
 # Remove the Docker volumes & start clean
 nuke: clean
 	docker-compose down -v
-	port=$(INITIAL_SERVER_PORT); \
-	while [ -z "$$DEV_SERVER_PORT" ] ; do \
-	  nc -z localhost $$port || export DEV_SERVER_PORT=$$port; \
-	  ((port++)); \
-	done; \
-	echo "### Using port: $$DEV_SERVER_PORT"; \
+	export DEV_SERVER_PORT=$$INITIAL_SERVER_PORT; \
+	if [ -z "$$CODESPACES" ]; then \
+		port=$(INITIAL_SERVER_PORT); \
+		while [ -z "$$DEV_SERVER_PORT" ] ; do \
+		  nc -z localhost $$port || export DEV_SERVER_PORT=$$port; \
+		  ((port++)); \
+		done; \
+		echo "### Using port: $$DEV_SERVER_PORT"; \
+	fi; \
 	cp -n example.env .env; \
 	docker-compose up --build --force-recreate
 # Open up a shell in the PHP container
@@ -64,12 +67,15 @@ ssh:
 	docker exec -it $(CONTAINER) su-exec www-data /bin/sh
 up:
 	if [ ! "$$(docker ps -q -f name=$(CONTAINER))" ]; then \
-  		port=$(INITIAL_SERVER_PORT); \
-		while [ -z "$$DEV_SERVER_PORT" ] ; do \
-		  nc -z localhost $$port || export DEV_SERVER_PORT=$$port; \
-		  ((port++)); \
-		done; \
-		echo "### Using port: $$DEV_SERVER_PORT"; \
+  		export DEV_SERVER_PORT=$$INITIAL_SERVER_PORT; \
+		if [ -z "$$CODESPACES" ]; then \
+	  		port=$(INITIAL_SERVER_PORT); \
+			while [ -z "$$DEV_SERVER_PORT" ] ; do \
+			  nc -z localhost $$port || export DEV_SERVER_PORT=$$port; \
+			  ((port++)); \
+			done; \
+			echo "### Using port: $$DEV_SERVER_PORT"; \
+		fi; \
 		cp -n example.env .env; \
 		docker-compose up; \
     fi
