@@ -23,6 +23,10 @@ if (App::env('CODESPACES')) {
 }
 
 return GeneralConfig::create()
+    // Explicitly set the @web alias from the PRIMARY_SITE_URL env var
+    ->aliases([
+        '@web' => App::env('PRIMARY_SITE_URL'),
+    ])
     ->runQueueAutomatically(false)
     // Set the default week start day for date pickers (0 = Sunday, 1 = Monday, etc.)
     ->defaultWeekStartDay(1)

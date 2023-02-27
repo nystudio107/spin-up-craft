@@ -8,6 +8,7 @@ ifneq (,$(findstring v2.,$(VERSION)))
 else
 	SEPARATOR:=_
 endif
+INITIAL_SERVER_PORT?=8050
 CONTAINER?=$(subst .,,$(shell basename $(CURDIR))$(SEPARATOR)php$(SEPARATOR)1)
 # Dummy empty values for Codespaces to avoid warnings from Docker
 CODESPACES?=
@@ -33,8 +34,6 @@ db-export: up
 db-import: up
 	docker exec -it $(CONTAINER) su-exec www-data /bin/sh \
 		-c 'cat /var/www/project/db-seed/*.sql | mysql -h mysql -u "${CRAFT_DB_USER}" -p"${CRAFT_DB_PASSWORD}" "${CRAFT_DB_DATABASE}"'
-# Start the dev server
-dev: up
 # Remove `vendor/` & `composer.lock`
 clean:
 	rm -f composer.lock
@@ -47,15 +46,40 @@ composer: up
 craft: up
 	docker exec -it $(CONTAINER) su-exec www-data php craft \
 		$(filter-out $@,$(MAKECMDGOALS)) $(MAKEFLAGS)
+# Start the dev server
+dev: up
 # Remove the Docker volumes & start clean
 nuke: clean
 	docker-compose down -v
+	if ! command -v nc &>/dev/null ; then \
+		DEV_SERVER_PORT="$${DEV_SERVER_PORT:=$(INITIAL_SERVER_PORT)}"; \
+		export DEV_SERVER_PORT; \
+	else \
+		port=$(INITIAL_SERVER_PORT); \
+		while [ -z "$$DEV_SERVER_PORT" ] ; do \
+		  nc -z localhost $$port &>/dev/null || export DEV_SERVER_PORT=$$port; \
+		  ((port++)); \
+		done; \
+		echo "### Using port: $$DEV_SERVER_PORT"; \
+	fi; \
+	cp -n example.env .env; \
 	docker-compose up --build --force-recreate
 # Open up a shell in the PHP container
 ssh:
 	docker exec -it $(CONTAINER) su-exec www-data /bin/sh
 up:
 	if [ ! "$$(docker ps -q -f name=$(CONTAINER))" ]; then \
+		if ! command -v nc &>/dev/null ; then \
+			DEV_SERVER_PORT="$${DEV_SERVER_PORT:=$(INITIAL_SERVER_PORT)}"; \
+			export DEV_SERVER_PORT; \
+		else \
+	  		port=$(INITIAL_SERVER_PORT); \
+			while [ -z "$$DEV_SERVER_PORT" ] ; do \
+			  nc -z localhost $$port &>/dev/null || export DEV_SERVER_PORT=$$port; \
+			  ((port++)); \
+			done; \
+			echo "### Using port: $$DEV_SERVER_PORT"; \
+		fi; \
 		cp -n example.env .env; \
 		docker-compose up; \
     fi
