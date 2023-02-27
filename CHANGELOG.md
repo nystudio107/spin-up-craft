@@ -1,5 +1,9 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.9 - UNRELEASED
+### Added
+* Added the `INITIAL_SERVER_PORT` env var so that we can scan for an open port, rather than just using a fixed port
+
 ## 1.0.8 - 2023.02.23
 ### Added
 * Add `spin-up-craft-base-dev` image that includes XDebug
