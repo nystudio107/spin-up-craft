@@ -11,6 +11,7 @@ services:
     env_file: &env_file
       - ./.env
     environment: &env
+      DEV_SERVER_PORT: "${DEV_SERVER_PORT}"
       CODESPACES: "${CODESPACES}"
       CODESPACE_NAME: "${CODESPACE_NAME}"
       GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN: "${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
