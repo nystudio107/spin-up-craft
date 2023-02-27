@@ -1,6 +1,6 @@
 # nystudio107/spin-up-craft Change Log
 
-## 1.0.9 - UNRELEASED
+## 1.0.9 - 2023.02.26
 ### Added
 * Added the `INITIAL_SERVER_PORT` env var so that we can scan for an open port, rather than just using a fixed port
 
