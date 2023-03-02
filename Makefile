@@ -50,6 +50,7 @@ craft: up
 dev: up
 # Remove the Docker volumes & start clean
 nuke: clean
+	cp -n example.env .env; \
 	docker-compose down -v
 	if ! command -v nc &>/dev/null ; then \
 		DEV_SERVER_PORT="$${DEV_SERVER_PORT:=$(INITIAL_SERVER_PORT)}"; \
@@ -62,7 +63,6 @@ nuke: clean
 		done; \
 		echo "### Using port: $$DEV_SERVER_PORT"; \
 	fi; \
-	cp -n example.env .env; \
 	docker-compose up --build --force-recreate
 # Open up a shell in the PHP container
 ssh:

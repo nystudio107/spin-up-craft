@@ -28,6 +28,14 @@ done
 # Ensure permissions on directories Craft needs to write to
 chown -R www-data:www-data /var/www/project/storage
 chown -R www-data:www-data /var/www/project/web/cpresources
+# Create a security key if it doesn't exist already
+if [ -z "$CRAFT_SECURITY_KEY" ] ; then
+    su-exec www-data php craft setup/security-key --interactive=0
+fi
+# Create an app id if it doesn't exist already
+if [ -z "$CRAFT_APP_ID" ] ; then
+    su-exec www-data php craft setup/app-id --interactive=0
+fi
 # Run any pending migrations/project config changes
 su-exec www-data php craft up --interactive=0
 # Banner message
