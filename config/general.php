@@ -27,6 +27,10 @@ return GeneralConfig::create()
     ->aliases([
         '@web' => App::env('PRIMARY_SITE_URL'),
     ])
+    // Use a unique CSRF token name, to avoid issues with CSRF validation with multiple instances of
+    // Craft running on the same host (localhost)
+    ->csrfTokenName(App::env('CRAFT_APP_ID'))
+    // Don't run the queue via web request, our queue container handles it
     ->runQueueAutomatically(false)
     // Set the default week start day for date pickers (0 = Sunday, 1 = Monday, etc.)
     ->defaultWeekStartDay(1)
