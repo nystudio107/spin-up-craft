@@ -1,5 +1,9 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.11 - 2023.03.02
+### Fixed
+* Use a unique CSRF token name, to avoid issues with CSRF validation with multiple instances of Craft running on the same host (localhost)
+
 ## 1.0.10 - 2023.03.02
 ### Changed
 * Ship with empty `CRAFT_APP_ID` & `CRAFT_SECURITY_KEY` env vars, and generate them via the `run_queue.sh` script, so each instance will have unique values
