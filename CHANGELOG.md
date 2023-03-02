@@ -1,5 +1,10 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.10 - 2023.03.02
+### Changed
+* Ship with empty `CRAFT_APP_ID` & `CRAFT_SECURITY_KEY` env vars, and generate them via the `run_queue.sh` script, so each instance will have unique values
+* Move the copying of the `.env` file to the beginning of `make nuke` to handle the case where it isn't present
+
 ## 1.0.9 - 2023.02.26
 ### Added
 * Added the `INITIAL_SERVER_PORT` env var so that we can scan for an open port, rather than just using a fixed port
