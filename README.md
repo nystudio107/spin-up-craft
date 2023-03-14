@@ -20,6 +20,8 @@ The project you'll get is the default Craft starter you might create with `compo
 
 If you intend to use this as a [Template Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) (like Spin Up Craft is), you'll want to go to the repo **Settings** and check the **Template repository** checkbox.
 
+You can also consider [adding an **Open in Codespaces**](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/setting-up-your-repository/adding-a-codespaces-badge) button.
+
 ## Using your Craft CMS project in a browser via Github Codespaces
 
 1. Go to your repo in Github
