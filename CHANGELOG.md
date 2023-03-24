@@ -1,6 +1,6 @@
 # nystudio107/spin-up-craft Change Log
 
-## 1.0.12 - UNRELEASED
+## 1.0.12 - 2023.03.23
 ### Changed
 * Updated to `craftcms/cms` `^4.4.5`
 * Switch to `jbergstroem/mariadb-alpine` for the db container, for a much smaller image size, and a much faster startup time
