@@ -2,7 +2,7 @@
 --
 -- Host: mysql    Database: project
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	10.6.12-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `addresses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `addresses` (
-  `id` int NOT NULL,
-  `ownerId` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `ownerId` int(11) DEFAULT NULL,
   `countryCode` varchar(255) NOT NULL,
   `administrativeArea` varchar(255) DEFAULT NULL,
   `locality` varchar(255) DEFAULT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `addresses` (
   KEY `fk_msabjvotpqgybymtyfljcwrvzrtnyhucxdav` (`ownerId`),
   CONSTRAINT `fk_dgkblzmegosoxlwxryjtdbhkrbfohigwbycg` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_msabjvotpqgybymtyfljcwrvzrtnyhucxdav` FOREIGN KEY (`ownerId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,12 +57,12 @@ DROP TABLE IF EXISTS `announcements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `announcements` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
-  `pluginId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `pluginId` int(11) DEFAULT NULL,
   `heading` varchar(255) NOT NULL,
   `body` text NOT NULL,
-  `unread` tinyint(1) NOT NULL DEFAULT '1',
+  `unread` tinyint(1) NOT NULL DEFAULT 1,
   `dateRead` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -71,7 +71,7 @@ CREATE TABLE `announcements` (
   KEY `fk_mjbhbneargqbsylhjpocmgyrwhahsqucbfih` (`pluginId`),
   CONSTRAINT `fk_mjbhbneargqbsylhjpocmgyrwhahsqucbfih` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_wgystrdsayywzgkmcnfxcpzowtnxzbmtqkmu` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,17 +82,17 @@ DROP TABLE IF EXISTS `assetindexdata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `assetindexdata` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sessionId` int NOT NULL,
-  `volumeId` int NOT NULL,
-  `uri` text,
-  `size` bigint unsigned DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sessionId` int(11) NOT NULL,
+  `volumeId` int(11) NOT NULL,
+  `uri` text DEFAULT NULL,
+  `size` bigint(20) unsigned DEFAULT NULL,
   `timestamp` datetime DEFAULT NULL,
-  `isDir` tinyint(1) DEFAULT '0',
-  `recordId` int DEFAULT NULL,
-  `isSkipped` tinyint(1) DEFAULT '0',
-  `inProgress` tinyint(1) DEFAULT '0',
-  `completed` tinyint(1) DEFAULT '0',
+  `isDir` tinyint(1) DEFAULT 0,
+  `recordId` int(11) DEFAULT NULL,
+  `isSkipped` tinyint(1) DEFAULT 0,
+  `inProgress` tinyint(1) DEFAULT 0,
+  `completed` tinyint(1) DEFAULT 0,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -101,7 +101,7 @@ CREATE TABLE `assetindexdata` (
   KEY `idx_lqzzfwwrxltemchtrojiagufiswghhycocoj` (`volumeId`),
   CONSTRAINT `fk_busfusgyqfapgbutswdeaoxhseomjesubbtz` FOREIGN KEY (`volumeId`) REFERENCES `volumes` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_pkcwcinyyeqedaerwgyzcsklkawphwzwicvx` FOREIGN KEY (`sessionId`) REFERENCES `assetindexingsessions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,18 +112,20 @@ DROP TABLE IF EXISTS `assetindexingsessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `assetindexingsessions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `indexedVolumes` text,
-  `totalEntries` int DEFAULT NULL,
-  `processedEntries` int NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `indexedVolumes` text DEFAULT NULL,
+  `totalEntries` int(11) DEFAULT NULL,
+  `processedEntries` int(11) NOT NULL DEFAULT 0,
   `cacheRemoteImages` tinyint(1) DEFAULT NULL,
-  `isCli` tinyint(1) DEFAULT '0',
-  `actionRequired` tinyint(1) DEFAULT '0',
+  `listEmptyFolders` tinyint(1) DEFAULT 0,
+  `isCli` tinyint(1) DEFAULT 0,
+  `actionRequired` tinyint(1) DEFAULT 0,
+  `processIfRootEmpty` tinyint(1) DEFAULT 0,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,16 +136,16 @@ DROP TABLE IF EXISTS `assets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `assets` (
-  `id` int NOT NULL,
-  `volumeId` int DEFAULT NULL,
-  `folderId` int NOT NULL,
-  `uploaderId` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `volumeId` int(11) DEFAULT NULL,
+  `folderId` int(11) NOT NULL,
+  `uploaderId` int(11) DEFAULT NULL,
   `filename` varchar(255) NOT NULL,
   `kind` varchar(50) NOT NULL DEFAULT 'unknown',
-  `alt` text,
-  `width` int unsigned DEFAULT NULL,
-  `height` int unsigned DEFAULT NULL,
-  `size` bigint unsigned DEFAULT NULL,
+  `alt` text DEFAULT NULL,
+  `width` int(10) unsigned DEFAULT NULL,
+  `height` int(10) unsigned DEFAULT NULL,
+  `size` bigint(20) unsigned DEFAULT NULL,
   `focalPoint` varchar(13) DEFAULT NULL,
   `deletedWithVolume` tinyint(1) DEFAULT NULL,
   `keptFile` tinyint(1) DEFAULT NULL,
@@ -159,7 +161,7 @@ CREATE TABLE `assets` (
   CONSTRAINT `fk_mvxjsllultcijerclhfbisuyaundnkhuilkh` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_odvvmufxpihhnilsjhhmgxtxyzobzjewkkqs` FOREIGN KEY (`folderId`) REFERENCES `volumefolders` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_pzxrsrqaciuhoselhftuwfnacvgvodqfuema` FOREIGN KEY (`volumeId`) REFERENCES `volumes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,9 +172,9 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
-  `id` int NOT NULL,
-  `groupId` int NOT NULL,
-  `parentId` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `parentId` int(11) DEFAULT NULL,
   `deletedWithGroup` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -182,7 +184,7 @@ CREATE TABLE `categories` (
   CONSTRAINT `fk_dvocndwjriwdpuvynroefopaprhuumpxvcce` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_qfeynhqczqrlzyyaupujzwgiervohcqtpmtv` FOREIGN KEY (`groupId`) REFERENCES `categorygroups` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_xzyemizxpqidqfmpbgcurdmzovcatfetfdib` FOREIGN KEY (`parentId`) REFERENCES `categories` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,9 +195,9 @@ DROP TABLE IF EXISTS `categorygroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorygroups` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `structureId` int NOT NULL,
-  `fieldLayoutId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `structureId` int(11) NOT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
   `defaultPlacement` enum('beginning','end') NOT NULL DEFAULT 'end',
@@ -211,7 +213,7 @@ CREATE TABLE `categorygroups` (
   KEY `idx_wsouzqewrpejdecuulacewimvjumwdlvwype` (`dateDeleted`),
   CONSTRAINT `fk_dljxktjrqlxtasizqkgeftonbzhysiezdaly` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_fggpwcpbqluxdafddjhcvuokriaghmbbrlom` FOREIGN KEY (`structureId`) REFERENCES `structures` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,11 +224,11 @@ DROP TABLE IF EXISTS `categorygroups_sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorygroups_sites` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `groupId` int NOT NULL,
-  `siteId` int NOT NULL,
-  `hasUrls` tinyint(1) NOT NULL DEFAULT '1',
-  `uriFormat` text,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `hasUrls` tinyint(1) NOT NULL DEFAULT 1,
+  `uriFormat` text DEFAULT NULL,
   `template` varchar(500) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -236,7 +238,7 @@ CREATE TABLE `categorygroups_sites` (
   KEY `idx_dmmpzkhwbkheqtumvvapnzksgtmgikbdovnn` (`siteId`),
   CONSTRAINT `fk_ayrpclmevzovlbvsphacezpmkytwiqviqbnx` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_fqtxalxicwkumjcxhrqmcgsubipzxqjzhcyu` FOREIGN KEY (`groupId`) REFERENCES `categorygroups` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,12 +249,12 @@ DROP TABLE IF EXISTS `changedattributes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `changedattributes` (
-  `elementId` int NOT NULL,
-  `siteId` int NOT NULL,
+  `elementId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
   `attribute` varchar(255) NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `propagated` tinyint(1) NOT NULL,
-  `userId` int DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
   PRIMARY KEY (`elementId`,`siteId`,`attribute`),
   KEY `idx_iuqqziobcmsnzimuaveaoxcnzjjhktqdvloc` (`elementId`,`siteId`,`dateUpdated`),
   KEY `fk_zboeazmaubtyfisfnodtttbdlmtnnxrqggna` (`siteId`),
@@ -260,7 +262,7 @@ CREATE TABLE `changedattributes` (
   CONSTRAINT `fk_djtbtnstxblwgqynusjgvjxkudsiqviiospk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_qjgnmqqxtwqxpiyeavhtxpdtqcmebtqmhkph` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_zboeazmaubtyfisfnodtttbdlmtnnxrqggna` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,12 +273,12 @@ DROP TABLE IF EXISTS `changedfields`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `changedfields` (
-  `elementId` int NOT NULL,
-  `siteId` int NOT NULL,
-  `fieldId` int NOT NULL,
+  `elementId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `propagated` tinyint(1) NOT NULL,
-  `userId` int DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
   PRIMARY KEY (`elementId`,`siteId`,`fieldId`),
   KEY `idx_dhspaagrufjcydckwfjpupecdgxzgswmfhfj` (`elementId`,`siteId`,`dateUpdated`),
   KEY `fk_szmtdyzyzinmftywoguuovnrttiebtkredej` (`siteId`),
@@ -286,7 +288,7 @@ CREATE TABLE `changedfields` (
   CONSTRAINT `fk_ovpgrlcyyuimieptsacalrorxuyqkkpcbpds` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_stuuzhstyyxgufqmcngnjsmzsyhlvromjxce` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_szmtdyzyzinmftywoguuovnrttiebtkredej` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,9 +299,9 @@ DROP TABLE IF EXISTS `content`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `content` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `elementId` int NOT NULL,
-  `siteId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `elementId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -310,7 +312,7 @@ CREATE TABLE `content` (
   KEY `idx_rgrowoyqhhhtdbdzruigjzffxuavqtqeicid` (`title`),
   CONSTRAINT `fk_bqomwnmcsbqexhsrvlxcibreijzftpuhlrwp` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_xsvqkvgigqgvjhiyogqkkwjkwxlflzzdyigl` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,8 +323,8 @@ DROP TABLE IF EXISTS `craftidtokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `craftidtokens` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
   `accessToken` text NOT NULL,
   `expiryDate` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
@@ -331,7 +333,7 @@ CREATE TABLE `craftidtokens` (
   PRIMARY KEY (`id`),
   KEY `fk_ektfcaaepmlvdscierryrdgxgddoporfluft` (`userId`),
   CONSTRAINT `fk_ektfcaaepmlvdscierryrdgxgddoporfluft` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,20 +344,20 @@ DROP TABLE IF EXISTS `deprecationerrors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `deprecationerrors` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(255) NOT NULL,
   `fingerprint` varchar(255) NOT NULL,
   `lastOccurrence` datetime NOT NULL,
   `file` varchar(255) NOT NULL,
-  `line` smallint unsigned DEFAULT NULL,
-  `message` text,
-  `traces` text,
+  `line` smallint(5) unsigned DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `traces` text DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_ddtccbzofpndlamlrocvhoyicjxclrhjjjek` (`key`,`fingerprint`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,22 +368,22 @@ DROP TABLE IF EXISTS `drafts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `drafts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `canonicalId` int DEFAULT NULL,
-  `creatorId` int DEFAULT NULL,
-  `provisional` tinyint(1) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `canonicalId` int(11) DEFAULT NULL,
+  `creatorId` int(11) DEFAULT NULL,
+  `provisional` tinyint(1) NOT NULL DEFAULT 0,
   `name` varchar(255) NOT NULL,
-  `notes` text,
-  `trackChanges` tinyint(1) NOT NULL DEFAULT '0',
+  `notes` text DEFAULT NULL,
+  `trackChanges` tinyint(1) NOT NULL DEFAULT 0,
   `dateLastMerged` datetime DEFAULT NULL,
-  `saved` tinyint(1) NOT NULL DEFAULT '1',
+  `saved` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `idx_curwyhpvadatseawdryxhqsouklhgpvtqnfi` (`creatorId`,`provisional`),
   KEY `idx_jhjrorhssqwigiibsgvnsiymxkimnrxbkumo` (`saved`),
   KEY `fk_yoelqncjxhgfnsrreqjbmokgqugoonamzdnf` (`canonicalId`),
   CONSTRAINT `fk_sjxysysjhyppvvzfngazzyeqfcttdshgqiqq` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_yoelqncjxhgfnsrreqjbmokgqugoonamzdnf` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,14 +394,14 @@ DROP TABLE IF EXISTS `elements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `elements` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `canonicalId` int DEFAULT NULL,
-  `draftId` int DEFAULT NULL,
-  `revisionId` int DEFAULT NULL,
-  `fieldLayoutId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `canonicalId` int(11) DEFAULT NULL,
+  `draftId` int(11) DEFAULT NULL,
+  `revisionId` int(11) DEFAULT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
   `type` varchar(255) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
-  `archived` tinyint(1) NOT NULL DEFAULT '0',
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `archived` tinyint(1) NOT NULL DEFAULT 0,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateLastMerged` datetime DEFAULT NULL,
@@ -420,7 +422,7 @@ CREATE TABLE `elements` (
   CONSTRAINT `fk_gbdzoypkeufspxygkegkwzocvqlncyungygg` FOREIGN KEY (`revisionId`) REFERENCES `revisions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_hkvlwkjxtlrrayypwrumgozetdfvzzynnhpq` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_tqmyrnrvxyvveunghayaxxnnadifrtysefpa` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -431,12 +433,12 @@ DROP TABLE IF EXISTS `elements_sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `elements_sites` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `elementId` int NOT NULL,
-  `siteId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `elementId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `uri` varchar(255) DEFAULT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -448,7 +450,7 @@ CREATE TABLE `elements_sites` (
   KEY `idx_nynrfguuklmzqfbwqwwsghcqxcnztyybgeyy` (`uri`,`siteId`),
   CONSTRAINT `fk_kgzyxygnsnnvtdontfcthscuzxkjjxnebjpd` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_qbtgabvbfiktiiswakthdhzsiiqgfxifcnsz` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -459,11 +461,11 @@ DROP TABLE IF EXISTS `entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entries` (
-  `id` int NOT NULL,
-  `sectionId` int NOT NULL,
-  `parentId` int DEFAULT NULL,
-  `typeId` int NOT NULL,
-  `authorId` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `parentId` int(11) DEFAULT NULL,
+  `typeId` int(11) NOT NULL,
+  `authorId` int(11) DEFAULT NULL,
   `postDate` datetime DEFAULT NULL,
   `expiryDate` datetime DEFAULT NULL,
   `deletedWithEntryType` tinyint(1) DEFAULT NULL,
@@ -481,7 +483,7 @@ CREATE TABLE `entries` (
   CONSTRAINT `fk_pbhovcuuxyporbardqfedhsqjtccipcyfecx` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ttaloxtlzsdjqefkakhtdckcjydfvyojpdkf` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_yrviuyajjrrumhwtlmrupgyxggqgmihusnlj` FOREIGN KEY (`typeId`) REFERENCES `entrytypes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,16 +494,16 @@ DROP TABLE IF EXISTS `entrytypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entrytypes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sectionId` int NOT NULL,
-  `fieldLayoutId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sectionId` int(11) NOT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
-  `hasTitleField` tinyint(1) NOT NULL DEFAULT '1',
+  `hasTitleField` tinyint(1) NOT NULL DEFAULT 1,
   `titleTranslationMethod` varchar(255) NOT NULL DEFAULT 'site',
-  `titleTranslationKeyFormat` text,
+  `titleTranslationKeyFormat` text DEFAULT NULL,
   `titleFormat` varchar(255) DEFAULT NULL,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
@@ -514,7 +516,7 @@ CREATE TABLE `entrytypes` (
   KEY `idx_mktvketumtcfmvsufzibrsbamqcokdjnshwd` (`dateDeleted`),
   CONSTRAINT `fk_kbkxbyifnvxxtozcdugycwntwtsfaveqlhpm` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_xkpcldfuthhwfjeeqwtrezmfugsluibqdkaw` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -525,7 +527,7 @@ DROP TABLE IF EXISTS `fieldgroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldgroups` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -534,7 +536,7 @@ CREATE TABLE `fieldgroups` (
   PRIMARY KEY (`id`),
   KEY `idx_imwqoeblxzxjxivvckhfwkwcnsxjdotrikkc` (`name`),
   KEY `idx_vdcawaezccybhftaiexnzcmuiuzehobqssga` (`dateDeleted`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,12 +547,12 @@ DROP TABLE IF EXISTS `fieldlayoutfields`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldlayoutfields` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `layoutId` int NOT NULL,
-  `tabId` int NOT NULL,
-  `fieldId` int NOT NULL,
-  `required` tinyint(1) NOT NULL DEFAULT '0',
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `layoutId` int(11) NOT NULL,
+  `tabId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `required` tinyint(1) NOT NULL DEFAULT 0,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -562,7 +564,7 @@ CREATE TABLE `fieldlayoutfields` (
   CONSTRAINT `fk_kwtwxstkeeplxystqsbbeumynqzsssoiuvwn` FOREIGN KEY (`layoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tqnxdvvhqykxjybbkvlxtiukwtdgvrvdpvgp` FOREIGN KEY (`tabId`) REFERENCES `fieldlayouttabs` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ydzjxxjrpkirghprbozltqtpyqpwrlkrjugj` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -573,7 +575,7 @@ DROP TABLE IF EXISTS `fieldlayouts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldlayouts` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -582,7 +584,7 @@ CREATE TABLE `fieldlayouts` (
   PRIMARY KEY (`id`),
   KEY `idx_diixgfqdmrosirhncdxttjktqinuxabytsoa` (`dateDeleted`),
   KEY `idx_nbnbcrppsgzsqjkfcygumjtlsksygcxxgstk` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -593,12 +595,12 @@ DROP TABLE IF EXISTS `fieldlayouttabs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldlayouttabs` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `layoutId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `layoutId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `settings` text,
-  `elements` text,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `settings` text DEFAULT NULL,
+  `elements` text DEFAULT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -606,7 +608,7 @@ CREATE TABLE `fieldlayouttabs` (
   KEY `idx_cgkrrpqvmuoewjgqikegegristhxdbrhnewm` (`sortOrder`),
   KEY `idx_pbnymoydnfsldjrpdqjvrhnonrycbfvqmxki` (`layoutId`),
   CONSTRAINT `fk_xfzilykajymmmdpezfvsdsbibikjsbpgjccv` FOREIGN KEY (`layoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -617,18 +619,18 @@ DROP TABLE IF EXISTS `fields`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fields` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `groupId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(64) NOT NULL,
   `context` varchar(255) NOT NULL DEFAULT 'global',
   `columnSuffix` char(8) DEFAULT NULL,
-  `instructions` text,
-  `searchable` tinyint(1) NOT NULL DEFAULT '1',
+  `instructions` text DEFAULT NULL,
+  `searchable` tinyint(1) NOT NULL DEFAULT 1,
   `translationMethod` varchar(255) NOT NULL DEFAULT 'none',
-  `translationKeyFormat` text,
+  `translationKeyFormat` text DEFAULT NULL,
   `type` varchar(255) NOT NULL,
-  `settings` text,
+  `settings` text DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -637,7 +639,7 @@ CREATE TABLE `fields` (
   KEY `idx_pxfrqqmdebjfjvarhcqhitilfnntpedtyphw` (`groupId`),
   KEY `idx_qdsbjuwemznsysnbpaqsloajrcwlrxoouyya` (`context`),
   CONSTRAINT `fk_ukoeadgflxsllkzthlrwrrtlmvhyanydwfts` FOREIGN KEY (`groupId`) REFERENCES `fieldgroups` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -648,11 +650,11 @@ DROP TABLE IF EXISTS `globalsets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `globalsets` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
-  `fieldLayoutId` int DEFAULT NULL,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -663,7 +665,7 @@ CREATE TABLE `globalsets` (
   KEY `idx_wjhhkehfapvepuusdkhjryttjoxsotaklmjr` (`sortOrder`),
   CONSTRAINT `fk_bpfauhmvzvafveapnlylgnogzacgbxyrtzgf` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_tjrgoubhfyuxzuhwqjbzmcphcaspluikfumi` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -674,15 +676,15 @@ DROP TABLE IF EXISTS `gqlschemas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gqlschemas` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `scope` text,
-  `isPublic` tinyint(1) NOT NULL DEFAULT '0',
+  `scope` text DEFAULT NULL,
+  `isPublic` tinyint(1) NOT NULL DEFAULT 0,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -693,13 +695,13 @@ DROP TABLE IF EXISTS `gqltokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gqltokens` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `accessToken` varchar(255) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
   `expiryDate` datetime DEFAULT NULL,
   `lastUsed` datetime DEFAULT NULL,
-  `schemaId` int DEFAULT NULL,
+  `schemaId` int(11) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -708,7 +710,7 @@ CREATE TABLE `gqltokens` (
   UNIQUE KEY `idx_zftdlfvqbkhwmqlyrlxnhkifoutvbzlmksvt` (`name`),
   KEY `fk_pgdydkmejezpzfmkqplzymxsifvbqwhwvehm` (`schemaId`),
   CONSTRAINT `fk_pgdydkmejezpzfmkqplzymxsifvbqwhwvehm` FOREIGN KEY (`schemaId`) REFERENCES `gqlschemas` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -719,22 +721,22 @@ DROP TABLE IF EXISTS `imagetransformindex`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `imagetransformindex` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `assetId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assetId` int(11) NOT NULL,
   `transformer` varchar(255) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `format` varchar(255) DEFAULT NULL,
   `transformString` varchar(255) NOT NULL,
-  `fileExists` tinyint(1) NOT NULL DEFAULT '0',
-  `inProgress` tinyint(1) NOT NULL DEFAULT '0',
-  `error` tinyint(1) NOT NULL DEFAULT '0',
+  `fileExists` tinyint(1) NOT NULL DEFAULT 0,
+  `inProgress` tinyint(1) NOT NULL DEFAULT 0,
+  `error` tinyint(1) NOT NULL DEFAULT 0,
   `dateIndexed` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_uozubtaczjmgounkzceydubgqxxjnhaoyqnq` (`assetId`,`transformString`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -745,16 +747,18 @@ DROP TABLE IF EXISTS `imagetransforms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `imagetransforms` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
-  `mode` enum('stretch','fit','crop') NOT NULL DEFAULT 'crop',
+  `mode` enum('stretch','fit','crop','letterbox') NOT NULL DEFAULT 'crop',
   `position` enum('top-left','top-center','top-right','center-left','center-center','center-right','bottom-left','bottom-center','bottom-right') NOT NULL DEFAULT 'center-center',
-  `width` int unsigned DEFAULT NULL,
-  `height` int unsigned DEFAULT NULL,
+  `width` int(10) unsigned DEFAULT NULL,
+  `height` int(10) unsigned DEFAULT NULL,
   `format` varchar(255) DEFAULT NULL,
-  `quality` int DEFAULT NULL,
+  `quality` int(11) DEFAULT NULL,
   `interlace` enum('none','line','plane','partition') NOT NULL DEFAULT 'none',
+  `fill` varchar(11) DEFAULT NULL,
+  `upscale` tinyint(1) NOT NULL DEFAULT 1,
   `parameterChangeTime` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -762,7 +766,7 @@ CREATE TABLE `imagetransforms` (
   PRIMARY KEY (`id`),
   KEY `idx_cvdoxggyqrozydzeilnvgsuiatwvezozieyp` (`name`),
   KEY `idx_bzlvvtwfxynqnfexgxxiinznucmauvhvjmxr` (`handle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -773,17 +777,17 @@ DROP TABLE IF EXISTS `info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `info` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `version` varchar(50) NOT NULL,
   `schemaVersion` varchar(15) NOT NULL,
-  `maintenance` tinyint(1) NOT NULL DEFAULT '0',
+  `maintenance` tinyint(1) NOT NULL DEFAULT 0,
   `configVersion` char(12) NOT NULL DEFAULT '000000000000',
   `fieldVersion` char(12) NOT NULL DEFAULT '000000000000',
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -794,10 +798,10 @@ DROP TABLE IF EXISTS `matrixblocks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `matrixblocks` (
-  `id` int NOT NULL,
-  `primaryOwnerId` int NOT NULL,
-  `fieldId` int NOT NULL,
-  `typeId` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `primaryOwnerId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `typeId` int(11) NOT NULL,
   `deletedWithOwner` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -809,7 +813,7 @@ CREATE TABLE `matrixblocks` (
   CONSTRAINT `fk_mowckeoaqvlsdtxtkiitenhmnlgupxrsbofh` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_uayurabdnscdjvhbgfkypzgxsjheoixzgrxj` FOREIGN KEY (`primaryOwnerId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_wrvhzxvrgjxzwdezcmyshpjkwmxufrenmoqe` FOREIGN KEY (`typeId`) REFERENCES `matrixblocktypes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -820,14 +824,14 @@ DROP TABLE IF EXISTS `matrixblocks_owners`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `matrixblocks_owners` (
-  `blockId` int NOT NULL,
-  `ownerId` int NOT NULL,
-  `sortOrder` smallint unsigned NOT NULL,
+  `blockId` int(11) NOT NULL,
+  `ownerId` int(11) NOT NULL,
+  `sortOrder` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`blockId`,`ownerId`),
   KEY `fk_onshdkkpjryjzfcghhycgploqtmrupqpfvav` (`ownerId`),
   CONSTRAINT `fk_bewwjjxrtsezdkyleeahtnldlbbnerytnmpq` FOREIGN KEY (`blockId`) REFERENCES `matrixblocks` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_onshdkkpjryjzfcghhycgploqtmrupqpfvav` FOREIGN KEY (`ownerId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -838,12 +842,12 @@ DROP TABLE IF EXISTS `matrixblocktypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `matrixblocktypes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `fieldId` int NOT NULL,
-  `fieldLayoutId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fieldId` int(11) NOT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -854,7 +858,7 @@ CREATE TABLE `matrixblocktypes` (
   KEY `idx_qfvowxlwvjfnkuwazckwgpyzyypwzrdpfzei` (`fieldLayoutId`),
   CONSTRAINT `fk_bomyvchgsezdenucronkkluqjrivoyrxepwu` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_zbgnefgehceamrzgssdckvsqkoyejhkjpqxp` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -865,7 +869,7 @@ DROP TABLE IF EXISTS `migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `migrations` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `track` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applyTime` datetime NOT NULL,
@@ -874,7 +878,7 @@ CREATE TABLE `migrations` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_bwoitonatyluxwuitjyzgmluoqgbxasjjiup` (`track`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -885,19 +889,17 @@ DROP TABLE IF EXISTS `plugins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `plugins` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `handle` varchar(255) NOT NULL,
   `version` varchar(255) NOT NULL,
   `schemaVersion` varchar(255) NOT NULL,
-  `licenseKeyStatus` enum('valid','trial','invalid','mismatched','astray','unknown') NOT NULL DEFAULT 'unknown',
-  `licensedEdition` varchar(255) DEFAULT NULL,
   `installDate` datetime NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_vuvauqxvdcciosbzvehxvnrpqngasulvjdkd` (`handle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -911,7 +913,7 @@ CREATE TABLE `projectconfig` (
   `path` varchar(255) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`path`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -922,26 +924,26 @@ DROP TABLE IF EXISTS `queue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `queue` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `channel` varchar(255) NOT NULL DEFAULT 'queue',
   `job` longblob NOT NULL,
-  `description` text,
-  `timePushed` int NOT NULL,
-  `ttr` int NOT NULL,
-  `delay` int NOT NULL DEFAULT '0',
-  `priority` int unsigned NOT NULL DEFAULT '1024',
+  `description` text DEFAULT NULL,
+  `timePushed` int(11) NOT NULL,
+  `ttr` int(11) NOT NULL,
+  `delay` int(11) NOT NULL DEFAULT 0,
+  `priority` int(10) unsigned NOT NULL DEFAULT 1024,
   `dateReserved` datetime DEFAULT NULL,
-  `timeUpdated` int DEFAULT NULL,
-  `progress` smallint NOT NULL DEFAULT '0',
+  `timeUpdated` int(11) DEFAULT NULL,
+  `progress` smallint(6) NOT NULL DEFAULT 0,
   `progressLabel` varchar(255) DEFAULT NULL,
-  `attempt` int DEFAULT NULL,
-  `fail` tinyint(1) DEFAULT '0',
+  `attempt` int(11) DEFAULT NULL,
+  `fail` tinyint(1) DEFAULT 0,
   `dateFailed` datetime DEFAULT NULL,
-  `error` text,
+  `error` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_vcfkfdoxramrhqstyzfvlihfaupnsjkluxtm` (`channel`,`fail`,`timeUpdated`,`timePushed`),
   KEY `idx_uadakxmkzghrhcwiqlwvkcvejhvynyrgfvng` (`channel`,`fail`,`timeUpdated`,`delay`)
-) ENGINE=InnoDB AUTO_INCREMENT=432 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=432 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -952,12 +954,12 @@ DROP TABLE IF EXISTS `relations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `relations` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `fieldId` int NOT NULL,
-  `sourceId` int NOT NULL,
-  `sourceSiteId` int DEFAULT NULL,
-  `targetId` int NOT NULL,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fieldId` int(11) NOT NULL,
+  `sourceId` int(11) NOT NULL,
+  `sourceSiteId` int(11) DEFAULT NULL,
+  `targetId` int(11) NOT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -968,9 +970,8 @@ CREATE TABLE `relations` (
   KEY `idx_buvzdxtoecztgmopusmrxqwgawbsjtiswflw` (`sourceSiteId`),
   CONSTRAINT `fk_byupggysxlkdqilhuciaazbiwgddmgjwftnp` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ggdrstfcnfvbtglryujhhkfihkqvlytdnldq` FOREIGN KEY (`sourceSiteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_ipycaijurbitmtrpacupumcnahxwqplzlwbd` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_mdezuxjcusagbxgxiesfvuyinylkerxmxtij` FOREIGN KEY (`targetId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_ipycaijurbitmtrpacupumcnahxwqplzlwbd` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -984,7 +985,7 @@ CREATE TABLE `resourcepaths` (
   `hash` varchar(255) NOT NULL,
   `path` varchar(255) NOT NULL,
   PRIMARY KEY (`hash`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -995,17 +996,17 @@ DROP TABLE IF EXISTS `revisions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `revisions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `canonicalId` int NOT NULL,
-  `creatorId` int DEFAULT NULL,
-  `num` int NOT NULL,
-  `notes` text,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `canonicalId` int(11) NOT NULL,
+  `creatorId` int(11) DEFAULT NULL,
+  `num` int(11) NOT NULL,
+  `notes` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_rpsotpuindomtnqizjqaowgjvdwultqaodrl` (`canonicalId`,`num`),
   KEY `fk_xcgsnamhhxxfcdfihibvnmsfwlxmxwxizsia` (`creatorId`),
   CONSTRAINT `fk_ncsbvlhkikkkrypibqljgwamlwyzasjercbk` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_xcgsnamhhxxfcdfihibvnmsfwlxmxwxizsia` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1016,14 +1017,14 @@ DROP TABLE IF EXISTS `searchindex`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `searchindex` (
-  `elementId` int NOT NULL,
+  `elementId` int(11) NOT NULL,
   `attribute` varchar(25) NOT NULL,
-  `fieldId` int NOT NULL,
-  `siteId` int NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
   `keywords` text NOT NULL,
   PRIMARY KEY (`elementId`,`attribute`,`fieldId`,`siteId`),
   FULLTEXT KEY `idx_qtifyfqpijgdbmwkkqerfpydggonvzyjdwuz` (`keywords`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1034,15 +1035,15 @@ DROP TABLE IF EXISTS `sections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sections` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `structureId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `structureId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
   `type` enum('single','channel','structure') NOT NULL DEFAULT 'channel',
-  `enableVersioning` tinyint(1) NOT NULL DEFAULT '0',
+  `enableVersioning` tinyint(1) NOT NULL DEFAULT 0,
   `propagationMethod` varchar(255) NOT NULL DEFAULT 'all',
   `defaultPlacement` enum('beginning','end') NOT NULL DEFAULT 'end',
-  `previewTargets` text,
+  `previewTargets` text DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
@@ -1053,7 +1054,7 @@ CREATE TABLE `sections` (
   KEY `idx_mdcyhvxpudpcovusxxpbncqkfxjcerlfawod` (`structureId`),
   KEY `idx_avfauefjfcnxaayllprbomskbcfdnvmfnlkr` (`dateDeleted`),
   CONSTRAINT `fk_iixudohwzsevkmsesdtcfatdqllnnyomhlrc` FOREIGN KEY (`structureId`) REFERENCES `structures` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1064,13 +1065,13 @@ DROP TABLE IF EXISTS `sections_sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sections_sites` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sectionId` int NOT NULL,
-  `siteId` int NOT NULL,
-  `hasUrls` tinyint(1) NOT NULL DEFAULT '1',
-  `uriFormat` text,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sectionId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `hasUrls` tinyint(1) NOT NULL DEFAULT 1,
+  `uriFormat` text DEFAULT NULL,
   `template` varchar(500) DEFAULT NULL,
-  `enabledByDefault` tinyint(1) NOT NULL DEFAULT '1',
+  `enabledByDefault` tinyint(1) NOT NULL DEFAULT 1,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -1079,7 +1080,7 @@ CREATE TABLE `sections_sites` (
   KEY `idx_ewbibexjibphcsjzgltkfzejpjirastnqksf` (`siteId`),
   CONSTRAINT `fk_swpuvuduilgpgrofyncxvllvqlyhplsjdrdw` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ysymocxxldspfetuukxbjsgnnletszmhiqah` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1091,9 +1092,9 @@ DROP TABLE IF EXISTS `sequences`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sequences` (
   `name` varchar(255) NOT NULL,
-  `next` int unsigned NOT NULL DEFAULT '1',
+  `next` int(10) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1104,8 +1105,8 @@ DROP TABLE IF EXISTS `sessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sessions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
   `token` char(100) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -1116,7 +1117,7 @@ CREATE TABLE `sessions` (
   KEY `idx_yazneqmwxikhavqobhucihwgnflrdncmudzi` (`dateUpdated`),
   KEY `idx_oeujcbvyujkxarpuqhrldhvybvgkdiubxgys` (`userId`),
   CONSTRAINT `fk_tuhyhbgxqqomovzsxwiabcuitncpnjaxbcnf` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1127,8 +1128,8 @@ DROP TABLE IF EXISTS `shunnedmessages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shunnedmessages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
   `message` varchar(255) NOT NULL,
   `expiryDate` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
@@ -1137,7 +1138,7 @@ CREATE TABLE `shunnedmessages` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_gxmssnflplycfojhardquudwaaetzrteitnn` (`userId`,`message`),
   CONSTRAINT `fk_ocksebcmxnuruqdjxydsahnntfuuhfiewegm` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1148,7 +1149,7 @@ DROP TABLE IF EXISTS `sitegroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sitegroups` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -1156,7 +1157,7 @@ CREATE TABLE `sitegroups` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_ohkqjkhxdxmrbhpwxxwyrlvniducxqkdnldd` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1167,16 +1168,16 @@ DROP TABLE IF EXISTS `sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sites` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `groupId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupId` int(11) NOT NULL,
   `primary` tinyint(1) NOT NULL,
   `enabled` varchar(255) NOT NULL DEFAULT 'true',
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
   `language` varchar(12) NOT NULL,
-  `hasUrls` tinyint(1) NOT NULL DEFAULT '0',
+  `hasUrls` tinyint(1) NOT NULL DEFAULT 0,
   `baseUrl` varchar(255) DEFAULT NULL,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
@@ -1187,7 +1188,7 @@ CREATE TABLE `sites` (
   KEY `idx_qevogplhncnlkfadbelqjwrzuqhujdibrdwv` (`sortOrder`),
   KEY `fk_tovfslllqdwlapmlncjxigccikdudlzwqbuy` (`groupId`),
   CONSTRAINT `fk_tovfslllqdwlapmlncjxigccikdudlzwqbuy` FOREIGN KEY (`groupId`) REFERENCES `sitegroups` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1198,13 +1199,13 @@ DROP TABLE IF EXISTS `structureelements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `structureelements` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `structureId` int NOT NULL,
-  `elementId` int DEFAULT NULL,
-  `root` int unsigned DEFAULT NULL,
-  `lft` int unsigned NOT NULL,
-  `rgt` int unsigned NOT NULL,
-  `level` smallint unsigned NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `structureId` int(11) NOT NULL,
+  `elementId` int(11) DEFAULT NULL,
+  `root` int(10) unsigned DEFAULT NULL,
+  `lft` int(10) unsigned NOT NULL,
+  `rgt` int(10) unsigned NOT NULL,
+  `level` smallint(5) unsigned NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -1215,9 +1216,8 @@ CREATE TABLE `structureelements` (
   KEY `idx_irdskieztirzdrspwebajbzftsbhokqhaerg` (`rgt`),
   KEY `idx_fcvhhbptaksrarpxhzblxugwciksaffnstph` (`level`),
   KEY `idx_qpcpkqlyjkeppalkzkvkresvylvfhusbrbgo` (`elementId`),
-  CONSTRAINT `fk_bxuutwhbochvepftcusxuficofxlvicrljfj` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_pazvrrxkmmjfahwynrgetqhdpgddznysvbcw` FOREIGN KEY (`structureId`) REFERENCES `structures` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1228,15 +1228,15 @@ DROP TABLE IF EXISTS `structures`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `structures` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `maxLevels` smallint unsigned DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `maxLevels` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_zjyeakmqzcpfeivjaglxozperqulhqvumzry` (`dateDeleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1247,7 +1247,7 @@ DROP TABLE IF EXISTS `systemmessages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `systemmessages` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `language` varchar(255) NOT NULL,
   `key` varchar(255) NOT NULL,
   `subject` text NOT NULL,
@@ -1258,7 +1258,7 @@ CREATE TABLE `systemmessages` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_ucevqojawzwborkwvjwgsfcybbykorkzfzcx` (`key`,`language`),
   KEY `idx_yqurubbtmynqbgvfyhsltiilbxraaxtdhrfg` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1269,10 +1269,10 @@ DROP TABLE IF EXISTS `taggroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `taggroups` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
-  `fieldLayoutId` int DEFAULT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
@@ -1283,7 +1283,7 @@ CREATE TABLE `taggroups` (
   KEY `idx_lyrdtdfnogxxfpyvqmeghabtrpyjshzrhbyb` (`dateDeleted`),
   KEY `fk_zzzfmeaiovlpglzisnmnjdeqopmfjzbczadf` (`fieldLayoutId`),
   CONSTRAINT `fk_zzzfmeaiovlpglzisnmnjdeqopmfjzbczadf` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1294,8 +1294,8 @@ DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tags` (
-  `id` int NOT NULL,
-  `groupId` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
   `deletedWithGroup` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -1303,7 +1303,7 @@ CREATE TABLE `tags` (
   KEY `idx_qmxiwsskrpdhpehpwzavuqcouswjiqyveuiz` (`groupId`),
   CONSTRAINT `fk_bsncminnekinqvfhsuwyyuvoyasewbujixca` FOREIGN KEY (`groupId`) REFERENCES `taggroups` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_rnuixgjlpkrtdhlcsztvfsuvzwxwjebribcy` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1314,11 +1314,11 @@ DROP TABLE IF EXISTS `tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tokens` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` char(32) NOT NULL,
-  `route` text,
-  `usageLimit` tinyint unsigned DEFAULT NULL,
-  `usageCount` tinyint unsigned DEFAULT NULL,
+  `route` text DEFAULT NULL,
+  `usageLimit` tinyint(3) unsigned DEFAULT NULL,
+  `usageCount` tinyint(3) unsigned DEFAULT NULL,
   `expiryDate` datetime NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -1326,7 +1326,7 @@ CREATE TABLE `tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_ksjayqxjenllhvsrcijcqekllpaainfelnwr` (`token`),
   KEY `idx_xydvfzqpqjmjctcjljgvrzudtnkgjccuvrks` (`expiryDate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1337,17 +1337,17 @@ DROP TABLE IF EXISTS `usergroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usergroups` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_oultxuqmrshfzkzeuvvfvzdtveebjsowvryt` (`handle`),
   KEY `idx_mnnejlifgwmksnurjzbmgaxasgwmtvukywty` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1358,9 +1358,9 @@ DROP TABLE IF EXISTS `usergroups_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usergroups_users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `groupId` int NOT NULL,
-  `userId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -1369,7 +1369,7 @@ CREATE TABLE `usergroups_users` (
   KEY `idx_vriahrctfketywjhulmjvbmqxmmnigdcmcoy` (`userId`),
   CONSTRAINT `fk_bjauwyoxqbxevscsolngtfdimvpqxxmcuqoz` FOREIGN KEY (`groupId`) REFERENCES `usergroups` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_epjzskxcguxtmqwdnmclbuseazcotshkhzbj` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1380,14 +1380,14 @@ DROP TABLE IF EXISTS `userpermissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userpermissions` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_ahzokmcpdjljbtvgnmnevbgybztsdjbblirv` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1398,9 +1398,9 @@ DROP TABLE IF EXISTS `userpermissions_usergroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userpermissions_usergroups` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `permissionId` int NOT NULL,
-  `groupId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permissionId` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -1409,7 +1409,7 @@ CREATE TABLE `userpermissions_usergroups` (
   KEY `idx_xruyntxcskjslgrtzklebpzncwaxhpksfsra` (`groupId`),
   CONSTRAINT `fk_goxzzzrupxuxzidhbpmtxnehrryqosmldvme` FOREIGN KEY (`groupId`) REFERENCES `usergroups` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_mucwcdryxhvbjbmqpieghmtjpkpfcxuqmcmn` FOREIGN KEY (`permissionId`) REFERENCES `userpermissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1420,9 +1420,9 @@ DROP TABLE IF EXISTS `userpermissions_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userpermissions_users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `permissionId` int NOT NULL,
-  `userId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permissionId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -1431,7 +1431,7 @@ CREATE TABLE `userpermissions_users` (
   KEY `idx_kvloffvvabhsevkikqlzsjsrhrdzqhfsfyzu` (`userId`),
   CONSTRAINT `fk_qszjwuhobqeoofodprzptiawnwmyegdfekbg` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_wtfacjjfkksjallznpcnwmugbemqwrqemszv` FOREIGN KEY (`permissionId`) REFERENCES `userpermissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1442,11 +1442,11 @@ DROP TABLE IF EXISTS `userpreferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userpreferences` (
-  `userId` int NOT NULL AUTO_INCREMENT,
-  `preferences` text,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `preferences` text DEFAULT NULL,
   PRIMARY KEY (`userId`),
   CONSTRAINT `fk_dgqmxwihecruwjvulfajoaeyyeuzrqydzknb` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1457,13 +1457,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL,
-  `photoId` int DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `pending` tinyint(1) NOT NULL DEFAULT '0',
-  `locked` tinyint(1) NOT NULL DEFAULT '0',
-  `suspended` tinyint(1) NOT NULL DEFAULT '0',
-  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
+  `photoId` int(11) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `pending` tinyint(1) NOT NULL DEFAULT 0,
+  `locked` tinyint(1) NOT NULL DEFAULT 0,
+  `suspended` tinyint(1) NOT NULL DEFAULT 0,
+  `admin` tinyint(1) NOT NULL DEFAULT 0,
   `username` varchar(255) DEFAULT NULL,
   `fullName` varchar(255) DEFAULT NULL,
   `firstName` varchar(255) DEFAULT NULL,
@@ -1473,14 +1473,14 @@ CREATE TABLE `users` (
   `lastLoginDate` datetime DEFAULT NULL,
   `lastLoginAttemptIp` varchar(45) DEFAULT NULL,
   `invalidLoginWindowStart` datetime DEFAULT NULL,
-  `invalidLoginCount` tinyint unsigned DEFAULT NULL,
+  `invalidLoginCount` tinyint(3) unsigned DEFAULT NULL,
   `lastInvalidLoginDate` datetime DEFAULT NULL,
   `lockoutDate` datetime DEFAULT NULL,
-  `hasDashboard` tinyint(1) NOT NULL DEFAULT '0',
+  `hasDashboard` tinyint(1) NOT NULL DEFAULT 0,
   `verificationCode` varchar(255) DEFAULT NULL,
   `verificationCodeIssuedDate` datetime DEFAULT NULL,
   `unverifiedEmail` varchar(255) DEFAULT NULL,
-  `passwordResetRequired` tinyint(1) NOT NULL DEFAULT '0',
+  `passwordResetRequired` tinyint(1) NOT NULL DEFAULT 0,
   `lastPasswordChangeDate` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -1495,7 +1495,7 @@ CREATE TABLE `users` (
   KEY `fk_oekxohrklnsghmpspsxpvswjkzomcyhcgaer` (`photoId`),
   CONSTRAINT `fk_mjvmslgeiurroqcfnfqfktgoyszidvphnmta` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_oekxohrklnsghmpspsxpvswjkzomcyhcgaer` FOREIGN KEY (`photoId`) REFERENCES `assets` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1506,9 +1506,9 @@ DROP TABLE IF EXISTS `volumefolders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `volumefolders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `parentId` int DEFAULT NULL,
-  `volumeId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentId` int(11) DEFAULT NULL,
+  `volumeId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `path` varchar(255) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
@@ -1520,7 +1520,7 @@ CREATE TABLE `volumefolders` (
   KEY `idx_xxxbgiaowddczjqxaxqrrucolfqwzshbqpnw` (`volumeId`),
   CONSTRAINT `fk_knuxmiriggkdroxikcalkngkhrbyfuyfrcmi` FOREIGN KEY (`volumeId`) REFERENCES `volumes` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_nocbtbjnheegqsrefgqgvwnujwjuyoiwzomp` FOREIGN KEY (`parentId`) REFERENCES `volumefolders` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1531,16 +1531,16 @@ DROP TABLE IF EXISTS `volumes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `volumes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `fieldLayoutId` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fieldLayoutId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
   `fs` varchar(255) NOT NULL,
   `transformFs` varchar(255) DEFAULT NULL,
   `transformSubpath` varchar(255) DEFAULT NULL,
   `titleTranslationMethod` varchar(255) NOT NULL DEFAULT 'site',
-  `titleTranslationKeyFormat` text,
-  `sortOrder` smallint unsigned DEFAULT NULL,
+  `titleTranslationKeyFormat` text DEFAULT NULL,
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
@@ -1551,7 +1551,7 @@ CREATE TABLE `volumes` (
   KEY `idx_emvorgbvupdlscomjgtydgktupvuxgirruah` (`fieldLayoutId`),
   KEY `idx_asyqynflyuuxvsgaskmtnljcevfmwayiummn` (`dateDeleted`),
   CONSTRAINT `fk_mufrazjnhecngzahobbcjttwchrfejajdaxd` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1562,20 +1562,20 @@ DROP TABLE IF EXISTS `widgets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `widgets` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `sortOrder` smallint unsigned DEFAULT NULL,
-  `colspan` tinyint DEFAULT NULL,
-  `settings` text,
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `sortOrder` smallint(5) unsigned DEFAULT NULL,
+  `colspan` tinyint(4) DEFAULT NULL,
+  `settings` text DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_qmprcbxpsoeusvovcspkwubvkrrbcjaohwbq` (`userId`),
   CONSTRAINT `fk_yetzzdnkpczkkuuskiervpkwvhkqovoembzi` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1591,12 +1591,12 @@ CREATE TABLE `widgets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-18  3:25:33
+-- Dump completed on 2023-03-24  0:37:04
 -- MariaDB dump 10.19  Distrib 10.6.12-MariaDB, for Linux (aarch64)
 --
 -- Host: mysql    Database: project
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	10.6.12-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1908,7 +1908,7 @@ commit;
 LOCK TABLES `info` WRITE;
 /*!40000 ALTER TABLE `info` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `info` VALUES (1,'4.3.10','4.0.0.9',0,'xqqgervoelhw','3@tylawohvfc','2023-02-02 05:28:23','2023-02-18 03:25:01','876de66d-7fde-40c5-b8b8-c4713c00d927');
+INSERT INTO `info` VALUES (1,'4.4.5','4.4.0.4',0,'omdfixslbsfs','3@tylawohvfc','2023-02-02 05:28:23','2023-03-24 00:36:23','876de66d-7fde-40c5-b8b8-c4713c00d927');
 /*!40000 ALTER TABLE `info` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -1953,7 +1953,7 @@ commit;
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `migrations` VALUES (1,'craft','Install','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','32ccba4d-556b-4fcd-9e7c-73a2e60aed4d'),(2,'craft','m210121_145800_asset_indexing_changes','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','110963d6-acbc-4052-ba24-5343051e4663'),(3,'craft','m210624_222934_drop_deprecated_tables','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','09e2ddd5-cb53-449a-bb38-f233c1571174'),(4,'craft','m210724_180756_rename_source_cols','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','ecb98123-06eb-4d65-9dae-588f920f5d1b'),(5,'craft','m210809_124211_remove_superfluous_uids','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','4de6ac73-1c13-4a53-8eaf-565ed1117d92'),(6,'craft','m210817_014201_universal_users','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','130028a6-a406-4471-96fb-6758b9525b0e'),(7,'craft','m210904_132612_store_element_source_settings_in_project_config','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','4b37ada2-81f1-4985-b0e5-e674b34e2968'),(8,'craft','m211115_135500_image_transformers','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','34b2fc16-745c-42d5-b4fb-e7ffbc312d7b'),(9,'craft','m211201_131000_filesystems','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','aca6e315-e112-496c-ba73-6e19bb36b7f3'),(10,'craft','m220103_043103_tab_conditions','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','8aa8b2fe-a585-4c84-8e23-1b3045b48e7a'),(11,'craft','m220104_003433_asset_alt_text','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','51804ab1-3c62-442e-a212-6fb539d779d5'),(12,'craft','m220123_213619_update_permissions','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','72bd9363-4be6-4094-bc55-b0aaf45b391b'),(13,'craft','m220126_003432_addresses','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','beb0b304-1443-4ca0-92e2-e2a93c99298f'),(14,'craft','m220209_095604_add_indexes','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','014c11d1-9f1b-4af9-b67b-6252d934ac91'),(15,'craft','m220213_015220_matrixblocks_owners_table','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','25e7db17-b5f4-470a-adf0-dae78569929b'),(16,'craft','m220214_000000_truncate_sessions','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','1451ff20-81bc-4270-890e-76ab3ede9c1c'),(17,'craft','m220222_122159_full_names','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','582ce54c-5d9d-42e4-a7ed-f01688cdc688'),(18,'craft','m220223_180559_nullable_address_owner','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','b95f7ab9-3df4-4bd2-bb9c-63a725405fa2'),(19,'craft','m220225_165000_transform_filesystems','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','04098051-2cc1-4706-96fc-6bd2af52dce4'),(20,'craft','m220309_152006_rename_field_layout_elements','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','ef9220f2-be58-466a-b464-dfa3a1c56e5d'),(21,'craft','m220314_211928_field_layout_element_uids','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','e1788361-9335-4b86-b917-08bbcab2cadb'),(22,'craft','m220316_123800_transform_fs_subpath','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','ac64d940-5a66-4f42-963d-0b31a660e0bd'),(23,'craft','m220317_174250_release_all_jobs','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','aa45919d-0094-40b9-9b56-12243f138a81'),(24,'craft','m220330_150000_add_site_gql_schema_components','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','15f9020e-4c57-4f00-a078-78245121f93f'),(25,'craft','m220413_024536_site_enabled_string','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','f7899074-4588-4744-be09-408addd05e81');
+INSERT INTO `migrations` VALUES (1,'craft','Install','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','32ccba4d-556b-4fcd-9e7c-73a2e60aed4d'),(2,'craft','m210121_145800_asset_indexing_changes','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','110963d6-acbc-4052-ba24-5343051e4663'),(3,'craft','m210624_222934_drop_deprecated_tables','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','09e2ddd5-cb53-449a-bb38-f233c1571174'),(4,'craft','m210724_180756_rename_source_cols','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','ecb98123-06eb-4d65-9dae-588f920f5d1b'),(5,'craft','m210809_124211_remove_superfluous_uids','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','4de6ac73-1c13-4a53-8eaf-565ed1117d92'),(6,'craft','m210817_014201_universal_users','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','130028a6-a406-4471-96fb-6758b9525b0e'),(7,'craft','m210904_132612_store_element_source_settings_in_project_config','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','4b37ada2-81f1-4985-b0e5-e674b34e2968'),(8,'craft','m211115_135500_image_transformers','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','34b2fc16-745c-42d5-b4fb-e7ffbc312d7b'),(9,'craft','m211201_131000_filesystems','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','aca6e315-e112-496c-ba73-6e19bb36b7f3'),(10,'craft','m220103_043103_tab_conditions','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','8aa8b2fe-a585-4c84-8e23-1b3045b48e7a'),(11,'craft','m220104_003433_asset_alt_text','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','51804ab1-3c62-442e-a212-6fb539d779d5'),(12,'craft','m220123_213619_update_permissions','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','72bd9363-4be6-4094-bc55-b0aaf45b391b'),(13,'craft','m220126_003432_addresses','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','beb0b304-1443-4ca0-92e2-e2a93c99298f'),(14,'craft','m220209_095604_add_indexes','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','014c11d1-9f1b-4af9-b67b-6252d934ac91'),(15,'craft','m220213_015220_matrixblocks_owners_table','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','25e7db17-b5f4-470a-adf0-dae78569929b'),(16,'craft','m220214_000000_truncate_sessions','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','1451ff20-81bc-4270-890e-76ab3ede9c1c'),(17,'craft','m220222_122159_full_names','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','582ce54c-5d9d-42e4-a7ed-f01688cdc688'),(18,'craft','m220223_180559_nullable_address_owner','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','b95f7ab9-3df4-4bd2-bb9c-63a725405fa2'),(19,'craft','m220225_165000_transform_filesystems','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','04098051-2cc1-4706-96fc-6bd2af52dce4'),(20,'craft','m220309_152006_rename_field_layout_elements','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','ef9220f2-be58-466a-b464-dfa3a1c56e5d'),(21,'craft','m220314_211928_field_layout_element_uids','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','e1788361-9335-4b86-b917-08bbcab2cadb'),(22,'craft','m220316_123800_transform_fs_subpath','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','ac64d940-5a66-4f42-963d-0b31a660e0bd'),(23,'craft','m220317_174250_release_all_jobs','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','aa45919d-0094-40b9-9b56-12243f138a81'),(24,'craft','m220330_150000_add_site_gql_schema_components','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','15f9020e-4c57-4f00-a078-78245121f93f'),(25,'craft','m220413_024536_site_enabled_string','2023-02-02 05:28:24','2023-02-02 05:28:24','2023-02-02 05:28:24','f7899074-4588-4744-be09-408addd05e81'),(26,'craft','m221027_160703_add_image_transform_fill','2023-03-24 00:19:13','2023-03-24 00:19:13','2023-03-24 00:19:13','b6cd06fc-7ecc-4d49-ba4b-325169fa616b'),(27,'craft','m221028_130548_add_canonical_id_index','2023-03-24 00:19:13','2023-03-24 00:19:13','2023-03-24 00:19:13','e0a77db8-b306-409e-9179-90de10d194b9'),(28,'craft','m221118_003031_drop_element_fks','2023-03-24 00:19:13','2023-03-24 00:19:13','2023-03-24 00:19:13','d6332820-9757-4021-900a-ea87a4673ea1'),(29,'craft','m230131_120713_asset_indexing_session_new_options','2023-03-24 00:19:13','2023-03-24 00:19:13','2023-03-24 00:19:13','589affd3-3133-4f43-8f17-43beb32d9edd'),(30,'craft','m230226_013114_drop_plugin_license_columns','2023-03-24 00:19:13','2023-03-24 00:19:13','2023-03-24 00:19:13','3288d620-ab05-4570-9ba3-ecec82602319');
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -1976,7 +1976,7 @@ commit;
 LOCK TABLES `projectconfig` WRITE;
 /*!40000 ALTER TABLE `projectconfig` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `projectconfig` VALUES ('dateModified','1675658606'),('email.fromEmail','\"info@putyourlightson.net\"'),('email.fromName','\"Craft Coding Challenge\"'),('email.transportType','\"craft\\\\mail\\\\transportadapters\\\\Sendmail\"'),('fieldGroups.31006d4c-2f40-498c-9a4c-69cff4fd4279.name','\"Common\"'),('graphql.publicToken.enabled','false'),('graphql.publicToken.expiryDate','null'),('meta.__names__.0779f354-f5d2-4f82-9a36-28a252f70ce4','\"Public Schema\"'),('meta.__names__.0d89c679-f6f5-42ae-8341-4bea917c6af7','\"$CRAFT_SITE_NAME\"'),('meta.__names__.31006d4c-2f40-498c-9a4c-69cff4fd4279','\"Common\"'),('meta.__names__.b55012be-3f7f-4150-b59c-5a6623c00743','\"Public Schema\"'),('meta.__names__.c7c2807b-84cc-4e1f-9279-af044bc0b472','\"Public Schema\"'),('meta.__names__.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6','\"$CRAFT_SITE_NAME\"'),('siteGroups.0d89c679-f6f5-42ae-8341-4bea917c6af7.name','\"$CRAFT_SITE_NAME\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.baseUrl','\"$PRIMARY_SITE_URL\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.enabled','true'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.handle','\"default\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.hasUrls','true'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.language','\"en-US\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.name','\"$CRAFT_SITE_NAME\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.primary','true'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.siteGroup','\"0d89c679-f6f5-42ae-8341-4bea917c6af7\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.sortOrder','1'),('system.edition','\"pro\"'),('system.live','true'),('system.name','\"$CRAFT_SITE_NAME\"'),('system.retryDuration','null'),('system.schemaVersion','\"4.0.0.9\"'),('system.timeZone','\"America/Los_Angeles\"'),('users.allowPublicRegistration','false'),('users.defaultGroup','null'),('users.photoSubpath','null'),('users.photoVolumeUid','null'),('users.requireEmailVerification','true');
+INSERT INTO `projectconfig` VALUES ('dateModified','1679617195'),('email.fromEmail','\"info@putyourlightson.net\"'),('email.fromName','\"Craft Coding Challenge\"'),('email.transportType','\"craft\\\\mail\\\\transportadapters\\\\Sendmail\"'),('fieldGroups.31006d4c-2f40-498c-9a4c-69cff4fd4279.name','\"Common\"'),('graphql.publicToken.enabled','false'),('graphql.publicToken.expiryDate','null'),('meta.__names__.0779f354-f5d2-4f82-9a36-28a252f70ce4','\"Public Schema\"'),('meta.__names__.0b13c242-c4bf-4365-b5d1-fd1fe51676d8','\"Public Schema\"'),('meta.__names__.0d89c679-f6f5-42ae-8341-4bea917c6af7','\"$CRAFT_SITE_NAME\"'),('meta.__names__.31006d4c-2f40-498c-9a4c-69cff4fd4279','\"Common\"'),('meta.__names__.b55012be-3f7f-4150-b59c-5a6623c00743','\"Public Schema\"'),('meta.__names__.c7c2807b-84cc-4e1f-9279-af044bc0b472','\"Public Schema\"'),('meta.__names__.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6','\"$CRAFT_SITE_NAME\"'),('siteGroups.0d89c679-f6f5-42ae-8341-4bea917c6af7.name','\"$CRAFT_SITE_NAME\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.baseUrl','\"$PRIMARY_SITE_URL\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.enabled','true'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.handle','\"default\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.hasUrls','true'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.language','\"en-US\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.name','\"$CRAFT_SITE_NAME\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.primary','true'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.siteGroup','\"0d89c679-f6f5-42ae-8341-4bea917c6af7\"'),('sites.f255ef6d-0c55-4bdc-9ced-f610bbb3bed6.sortOrder','1'),('system.edition','\"pro\"'),('system.live','true'),('system.name','\"$CRAFT_SITE_NAME\"'),('system.retryDuration','null'),('system.schemaVersion','\"4.4.0.4\"'),('system.timeZone','\"America/Los_Angeles\"'),('users.allowPublicRegistration','false'),('users.defaultGroup','null'),('users.photoSubpath','null'),('users.photoVolumeUid','null'),('users.requireEmailVerification','true');
 /*!40000 ALTER TABLE `projectconfig` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2287,4 +2287,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-18  3:25:33
+-- Dump completed on 2023-03-24  0:37:04
