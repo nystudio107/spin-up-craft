@@ -38,14 +38,15 @@ services:
     stop_grace_period: "1s"
     tty: true
     volumes: &php-volumes
+      # Bind mount the entire project directory
+      - ./:/var/www/project:cached
+      # Directories we want to persist as volumes
       - cpresources:/var/www/project/web/cpresources:delegated
       - storage:/var/www/project/storage:delegated
-      - ./:/var/www/project:cached
-      # Specific directories that need to be bind-mounted
+      # Specific directories that need to be bind mounted inside the volumes
       - ./storage/logs:/var/www/project/storage/logs:delegated
       - ./storage/runtime/compiled_templates:/var/www/project/storage/runtime/compiled_templates:delegated
       - ./storage/runtime/compiled_classes:/var/www/project/storage/runtime/compiled_classes:delegated
-      - ./vendor:/var/www/project/vendor:delegated
   # mysql - database
   mysql:
     build:
