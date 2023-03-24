@@ -1,5 +1,11 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.12 - UNRELEASED
+### Changed
+* Updated to `craftcms/cms` `^4.4.5`
+* Switch to `jbergstroem/mariadb-alpine` for the db container, for a much smaller image size, and a much faster startup time
+* Run `php craft up` and display the banner message only from the queue container
+
 ## 1.0.11 - 2023.03.02
 ### Fixed
 * Use a unique CSRF token name, to avoid issues with CSRF validation with multiple instances of Craft running on the same host (localhost)
