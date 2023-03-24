@@ -30,11 +30,11 @@ You can also consider [adding an **Open in Codespaces**](https://docs.github.com
 4. Wait until you see output like this, and then access the site via the credentials that are output on the console:
 
 ```
-php_1    | ### Your Craft site is ready!
-php_1    | Frontend URL: https://khalwat-opulent-xylophone-q59g6p5vqj3rvr-8050.preview.app.github.dev/
-php_1    | CP URL: https://khalwat-opulent-xylophone-q59g6p5vqj3rvr-8050.preview.app.github.dev/admin
-php_1    | CP User: admin
-php_1    | CP Password: project
+queue_1    | ### Your Craft site is ready!
+queue_1    | Frontend URL: https://khalwat-opulent-xylophone-q59g6p5vqj3rvr-8050.preview.app.github.dev/
+queue_1    | CP URL: https://khalwat-opulent-xylophone-q59g6p5vqj3rvr-8050.preview.app.github.dev/admin
+queue_1    | CP User: admin
+queue_1    | CP Password: project
 ```
 
 This lets anyone use the project without having to do _any_ local setup.
@@ -60,11 +60,11 @@ You are limited to 15 active Codespaces on the free plan, but you can go in and 
 5. Wait until you see output like this, and then access the site via the credentials that are output on the console:
 
 ```
-spin-up-craft-php-1    | ### Your Craft site is ready!
-spin-up-craft-php-1    | Frontend URL: http://localhost:8050/
-spin-up-craft-php-1    | CP URL: http://localhost:8050/admin
-spin-up-craft-php-1    | CP User: admin
-spin-up-craft-php-1    | CP Password: project
+spin-up-craft-queue-1  | ### Your Craft site is ready!
+spin-up-craft-queue-1  | Frontend URL: http://localhost:8050/
+spin-up-craft-queue-1  | CP URL: http://localhost:8050/admin
+spin-up-craft-queue-1  | CP User: admin
+spin-up-craft-queue-1  | CP Password: project
 ```
 
 Hit `Control-C` to terminate the project and spin down the containers
