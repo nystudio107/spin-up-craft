@@ -2,7 +2,7 @@
 
 ## 1.0.13 - UNRELEASED
 ### Changed
-* Clean up by using `docker compose` api
+* Clean up the `Makefile` by using `docker compose` api
 
 ## 1.0.12 - 2023.03.23
 ### Changed
