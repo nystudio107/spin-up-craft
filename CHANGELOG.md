@@ -1,8 +1,9 @@
 # nystudio107/spin-up-craft Change Log
 
-## 1.0.13 - UNRELEASED
+## 1.0.13 - 2023.03.30
 ### Changed
 * Clean up the `Makefile` by using `docker compose` api
+* Fully switch from the old `docker-compose` api to the new `docker compose` api
 
 ## 1.0.12 - 2023.03.23
 ### Changed
