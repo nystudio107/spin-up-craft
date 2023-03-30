@@ -43,7 +43,7 @@ dev: up
 # Remove the Docker volumes & start clean
 nuke: clean
 	cp -n example.env .env; \
-	docker-compose down -v
+	docker compose down -v
 	if ! command -v nc &>/dev/null ; then \
 		DEV_SERVER_PORT="$${DEV_SERVER_PORT:=$(INITIAL_SERVER_PORT)}"; \
 		export DEV_SERVER_PORT; \
@@ -55,7 +55,7 @@ nuke: clean
 		done; \
 		echo "### Using port: $$DEV_SERVER_PORT"; \
 	fi; \
-	docker-compose up --build --force-recreate
+	docker compose up --build --force-recreate
 # Open up a shell in the PHP container
 ssh:
 	docker compose exec -it php su-exec www-data /bin/sh
@@ -73,7 +73,7 @@ up:
 			echo "### Using port: $$DEV_SERVER_PORT"; \
 		fi; \
 		cp -n example.env .env; \
-		docker-compose up; \
+		docker compose up; \
     fi
 %:
 	@:
