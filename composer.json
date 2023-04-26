@@ -16,9 +16,6 @@
       "craftcms/plugin-installer": true,
       "yiisoft/yii2-composer": true
     },
-    "sort-packages": true,
-    "platform": {
-      "php": "8.0.2"
-    }
+    "sort-packages": true
   }
 }

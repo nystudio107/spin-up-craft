@@ -1,5 +1,12 @@
 # nystudio107/spin-up-craft Change Log
 
+## 1.0.14 - 2023.04.25
+### Fixed
+* Wait not just for the database to be available, but also that the `info` table has been populated before proceeding with the `queue` container ([#2](https://github.com/nystudio107/spin-up-craft/issues/2))
+
+### Changed
+* Remove PHP platform version
+
 ## 1.0.13 - 2023.03.30
 ### Changed
 * Clean up the `Makefile` by using `docker compose` api

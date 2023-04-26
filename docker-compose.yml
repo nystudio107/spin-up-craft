@@ -71,7 +71,7 @@ services:
       *php-build
     command: /var/www/run_queue.sh
     depends_on:
-      - "php"
+      - "mysql"
     env_file:
       *env_file
     environment:
