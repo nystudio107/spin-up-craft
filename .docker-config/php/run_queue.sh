@@ -30,7 +30,7 @@ done
 # Second wait until content in the `info` table exists
 until [ $(eval "$COMMAND") !=  "0" ]
 do
-    echo "### Waiting for database `info` table"
+    echo "### Waiting for database 'info' table"
     sleep 5
 done
 # Ensure permissions on directories Craft needs to write to
