@@ -5,4 +5,5 @@ docker buildx build \
 --push \
 --no-cache \
 --platform linux/arm64/v8,linux/amd64 \
---tag nystudio107/spin-up-craft-base-dev:8.1-alpine .
+--tag nystudio107/spin-up-craft-base-dev:8.2-alpine \
+--tag nystudio107/spin-up-craft-base-dev:latest .

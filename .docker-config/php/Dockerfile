@@ -1,4 +1,4 @@
-FROM nystudio107/spin-up-craft-base:8.1-alpine
+FROM nystudio107/spin-up-craft-base:8.2-alpine
 
 WORKDIR /var/www
 
