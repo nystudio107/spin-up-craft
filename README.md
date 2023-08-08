@@ -79,9 +79,13 @@ This project uses `make` to execute various commands in the appropriate containe
 * `make composer xxx` - Execute a composer command in the PHP container
 * `make craft xxx` - Execute a `craft` CLI command in the PHP container
 * `make ssh` - Open up a shell in the PHP container
-* `make db-admin-reset` - Reset the admin (user with the `ID=1`) to the defaults in from the `.env` file; useful after importing a foreign database
 * `make db-export` - Clean the `db-seed/` directory and export the database to it
 * `make db-import` - Import the db from `db-seed/` directory into the mysql container
+* `make db-admin-reset` - Reset the admin (user with the `ID=1`) to the defaults in from the `.env` file; useful after importing a foreign database.  This defaults to:
+
+**Login:** `admin`
+
+**Password:** `project`
 
 If the project is already running via `make dev` you can use a second terminal tab/window to execute additional commands.
 
@@ -122,10 +126,15 @@ If you don't have a login, or the client doesn't wish to share their password, y
 make db-admin-reset
 ```
 
-...which will reset the admin user (`ID=1`) to the defaults specified in the `.env` file
+...which will reset the admin user (`ID=1`) to the defaults specified in the `.env` file. This defaults to:
+
+**Login:** `admin`
+
+**Password:** `project`
 
 Usually the `composer.json`, `composer.lock`, and database dump are all you need to replicate issues. But if additional config/template files are needed, obtain them as well.
 
+**N.B.:** You may want to remove the `config/project` directory before running `make db-admin-reset` too, so Project Config doesn't make changes to the newly imported database.
 
 ## Random notes
 
